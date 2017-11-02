@@ -1,0 +1,85 @@
+@import "textarea.css";
+@import "buttons.css";
+@import "dropdown.css";
+@import "tables.css";
+@import "canvas.css";
+@import url('https://fonts.googleapis.com/css?family=Exo+2|Noto+Sans');
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Exo 2";
+}
+
+header {
+    /*background-color: #1A1A1A;*/
+    text-align: center;
+    padding: 1%;
+    color: #CCC;
+}
+
+html {
+    padding: 2px;
+    height: 99%;
+    width: 99%;
+}
+
+body.normal {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #0F0F0F;
+    /*background-color: gray;*/
+    margin: 0 auto;
+
+    opacity: 1;
+    transition: 0.3s opacity;
+}
+
+body.fade-out {
+  opacity: 0;
+  transition: none;
+
+}
+
+#h3 {
+    color: white;
+    position: absolute;
+    margin-left: 1%;
+    margin-right: 1%;
+    top: 75%;
+    left: 0%;
+}
+
+#fasLogo {
+    margin-left: 1%;
+    margin-right: 1%;
+    position: absolute;
+    bottom: 0%;
+    width: 10%;
+    /*background-image: url("../res/fasLogo.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30%;*/
+    right: 25%;
+}
+
+#splash-image {
+    margin-left: 1%;
+    margin-right: 1%;
+    position: absolute;
+    left: 37%;
+    top: 30%;
+    bottom: 0%;
+    width: 25%;
+}
+
+footer {
+    color: white;
+    margin-left: 1%;
+    margin-right: 1%;
+    position: absolute;
+    bottom: 2%;
+    right: 0%;
+    /*height: 10%;*/
+    width: 25%;
+}

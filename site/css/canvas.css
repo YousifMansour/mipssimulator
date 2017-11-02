@@ -1,0 +1,30 @@
+canvas.fullscreen {
+	margin-top: 2%;
+	background-color: #171717;
+
+	position: absolute;
+
+	top: 6%;
+	left : 1%;
+	
+
+	border: 2px solid white;
+	/*margin-left: 1%;
+	margin-right:1%;*/
+	border-radius: 20px;
+}
+
+canvas.nofullscreen {
+	margin-top: 2%;
+	background-color: #171717;
+
+	position: absolute;
+	top: 7%;
+	left : 24%;
+
+
+	border: 2px solid white;
+	/*margin-left: 1%;
+	margin-right:1%;*/
+	border-radius: 20px;
+}

@@ -1,0 +1,15 @@
+{
+    "files":["Main.ts"],
+    "compilerOptions":{
+        
+        "allowJs": true,
+        "removeComments": true,
+        "outDir": "./../js"
+    },
+    "exclude": [
+        "responsiveVoicec",
+        "jscolor",
+        "lib",
+        "node_modules"
+    ]
+} 

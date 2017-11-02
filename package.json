@@ -1,0 +1,28 @@
+{
+  "name": "mipssimulator",
+  "version": "1.0.0",
+  "description": "mips instructions simulator",
+  "main": "index.html",
+  "dependencies": {
+    "jscolor": "^0.2.2",
+    "splash-screen": "^3.0.1",
+    "typescript-collections": "^1.2.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YousifMansour/mipssimulator.git"
+  },
+  "keywords": [
+    "mips"
+  ],
+  "author": "David Daou, Huessein Harakeh, Raymond Edde and Yousif Mansour",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/YousifMansour/mipssimulator/issues"
+  },
+  "homepage": "https://github.com/YousifMansour/mipssimulator#readme"
+}

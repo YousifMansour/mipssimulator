@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>MIPS Simulator </title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="script/node_modules/splash-screen/dist/splash.min.css">
+	
+ 
+
+	<script tex="text/javascript" src="script/ttsConfig.js"></script>
+	<script src="script//jscolor.js"></script>
+	<script src="script//responsivevoice.js"></script>
+
+	<script type="text/javascript" src="script/bundle.js"></script>
+
+</head>
+
+<body class="normal">
+
+	<img id="splash-image" src="res/faslogo_trans.png"> </img>
+
+	<div id="hide" style="display: none;">
+
+		<header id="header">
+
+			<!--<img id="mips_logo" src="res/mips_logo.png" height="35px" width="35px">-->
+
+
+			<h1>
+			<img id = "logo" src="res/mips_logo_white.png" width="32%" height="32%"></img>
+		</h1>
+
+		</header>
+		<textarea id="textInput" spellcheck="false" autocomplete="false" auto id="textInput" rows="22" cols="30">.text
+
+init:
+
+addi $t0, $zero, 0
+addi $t1, $zero, 4
+
+lw $s0, array($t0)
+lw $s1, array($t1)
+
+loop:
+beq $s0, $t2, exit
+addi $t2, $t2, 1
+add $s2, $s2, $s1
+j loop
+
+exit:
+
+
+.data
+array: .word 2, 3
+</textarea>
+
+		<textarea id="console" class="console" spellcheck="false" autocomplete="false" rows="6" cols="12" disabled>
+</textarea>
+
+		<canvas class="nofullscreen" id="canvas"></canvas>
+
+		<!--<h3 id="h3">Running Instuction:</h3>-->
+
+		<table id="detailedTable" class="nofullscreen" cellspacing="0" cellpadding="0" border="1">
+			<tr>
+				<th>Instruction</th>
+				<th>RegDst</th>
+				<th>AluSrc</th>
+				<th>MemReg</th>
+				<th>RegWr</th>
+				<th>MemRd</th>
+				<th>MemWr</th>
+				<th>Branch</th>
+				<th>AluOp</th>
+				<th>Jump</th>
+			</tr>
+
+			<tr>
+				<th id="instructionIndicator">_</th>
+				<th id="RegDst"></th>
+				<th id="AluSrc"></th>
+				<th id="MemReg"></th>
+				<th id="RegWr"></th>
+				<th id="MemRd"></th>
+				<th id="MemWr"></th>
+				<th id="Branch"></th>
+				<th id="AluOp"></th>
+				<th id="Jump"></th>
+			</tr>
+
+		</table>
+
+		<textarea id="instructionAndArguments" style="overflow:hidden" spellcheck="false" autocomplete="false" rows="2" cols="30" disabled>
+	</textarea>
+
+		<!--<textarea class="nofullscreen" id="instructionIndicator" disabled rows="2"></textarea>-->
+
+		<table id="registersTable" class="nofullscreen">
+			<tr>
+				<th>
+					Register
+				</th>
+
+				<th>
+					Value
+				</th>
+			</tr>
+
+			<tr>
+				<th id="$zerolabel">
+					$zero
+				</th>
+
+				<th id="$zero">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$atlabel">
+					$at
+				</th>
+
+				<th id="$at">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$v0label">
+					$v0
+				</th>
+
+				<th id="$v0">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$v1label">
+					$v1
+				</th>
+
+				<th id="$v1">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$a0label">
+					$a0
+				</th>
+
+				<th id="$a0">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$a1label">
+					$a1
+				</th>
+
+				<th id="$a1">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$a2label">
+					$a2
+				</th>
+
+				<th id="$a2">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$a3label">
+					$a3
+				</th>
+
+				<th id="$a3">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t0label">
+					$t0
+				</th>
+
+				<th id="$t0">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t1label">
+					$t1
+				</th>
+
+				<th id="$t1">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t2label">
+					$t2
+				</th>
+
+				<th id="$t2">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t3label">
+					$t3
+				</th>
+
+				<th id="$t3">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t4label">
+					$t4
+				</th>
+
+				<th id="$t4">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t5label">
+					$t5
+				</th>
+
+				<th id="$t5">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t6label">
+					$t6
+				</th>
+
+				<th id="$t6">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t7label">
+					$t7
+				</th>
+
+				<th id="$t7">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s0label">
+					$s0
+				</th>
+
+				<th id="$s0">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s1label">
+					$s1
+				</th>
+
+				<th id="$s1">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s2label">
+					$s2
+				</th>
+
+				<th id="$s2">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s3label">
+					$s3
+				</th>
+
+				<th id="$s3">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s4label">
+					$s4
+				</th>
+
+				<th id="$s4">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s5label">
+					$s5
+				</th>
+
+				<th id="$s5">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s6label">
+					$s6
+				</th>
+
+				<th id="$s6">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$s7label">
+					$s7
+				</th>
+
+				<th id="$s7">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t8label">
+					$t8
+				</th>
+
+				<th id="$t8">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$t9label">
+					$t9
+				</th>
+
+				<th id="$t9">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$k0label">
+					$k0
+				</th>
+
+				<th id="$k0">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$k1label">
+					$k1
+				</th>
+
+				<th id="$k1">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$gplabel">
+					$gp
+				</th>
+
+				<th id="$gp">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$splabel">
+					$sp
+				</th>
+
+				<th id="$sp">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$fplabel">
+					$fp
+				</th>
+
+				<th id="$fp">
+					0
+				</th>
+			</tr>
+			<tr>
+				<th id="$ralabel">
+					$ra
+				</th>
+
+				<th id="$ra">
+					0
+				</th>
+			</tr>
+
+		</table>
+
+		<div id="buttonsdiv">
+
+			<button id="runButton"></button>
+
+			<button id="nextButton"></button>
+
+			<button id="previousButton"></button>
+
+			<button id="editButton"></Button>
+
+			<button id="fullScreenButton"></button>
+
+			<button id="changeThemeButton">Change Theme</button>
+
+			<button id="soundButton"></button>
+
+			<button id="changeColorButton" class="jscolor {valueElement:null,value:'#ffff66',onFineChange:'update(this)'}">Change Color</button>
+			<!-- I dont like having a <script> inside here. But this is the only way I know how to do this now. -->
+			<script>
+				function update(jscolor) {
+					document.getElementById("changeColorButton").style.background = '#' + jscolor;
+				}
+			</script>
+
+			<button id="changeSpeedButton">Change Speed</button>
+			<div id="speed">
+				<button id="fastButton">fast</button>
+				<button id="normalButton">normal</button>
+				<button id="slowButton">slow</button>
+			</div>
+
+		</div>
+
+		<!--<table id="firsttable">
+
+		<tr>
+			<th>Instuction</th>
+			<th>Type</th>
+
+		</tr>
+		<tr>
+			<td>add</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>addu</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>sub</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>subu</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>and</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>or</td>
+			<td>R-Type</td>
+
+		</tr>
+
+		<tr>
+			<td>slt</td>
+			<td>R-Type</td>
+
+		</tr>
+
+	</table>
+
+	<table id="secondtable">
+
+		<tr>
+			<th>Instuction</th>
+			<th>Type</th>
+
+			<tr>
+				<td>sltu</td>
+				<td>R-Type</td>
+
+			</tr>
+
+			<tr>
+				<td>addi</td>
+				<td>I-Type</td>
+			</tr>
+			<tr>
+				<td>addiu</td>
+				<td>I-Type</td>
+			</tr>
+			<tr>
+				<td>andi</td>
+				<td>I-Type</td>
+			</tr>
+			<tr>
+				<td>slti</td>
+				<td>I-Type</td>
+			</tr>
+			<tr>
+				<td>sltiu</td>
+				<td>I-Type</td>
+			</tr>
+			<tr>
+				<td>ori</td>
+				<td>I-Type</td>
+			</tr>
+
+	</table>
+
+	<table id="thirdtable">
+
+		<tr>
+			<th>Instuction</th>
+			<th>Type</th>
+
+			<tr>
+				<td>lw</td>
+				<td>lw</td>
+			</tr>
+			<tr>
+				<td>lb</td>
+				<td>lw</td>
+			</tr>
+
+			<tr>
+				<td>sw</td>
+				<td>sw</td>
+			</tr>
+			<tr>
+				<td>sb</td>
+				<td>sw</td>
+			</tr>
+
+			<tr>
+				<td>beq</td>
+				<td>beq</td>
+			</tr>
+			<tr>
+				<td>j</td>
+				<td>j</td>
+			</tr>
+
+	</table>-->
+
+		<img id="fasLogo" src="res/faslogo_trans.png"></img>
+
+		<footer id="footer"> &copy;
+			<script language="JavaScript" type="text/javascript">
+				document.write((new Date()).getFullYear());
+			</script> AUB Computer Science Department. <br> Faculty Of Arts And Sciences.</footer>
+	</div>
+</body>
+
+
+</html>

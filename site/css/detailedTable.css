@@ -1,0 +1,14 @@
+#detailedTable.nofullscreen {
+    position: absolute;
+    display: "block";
+	top: 78%;
+	left : 1%;
+}
+
+#detailedTable.fullscreen {
+    position: absolute;
+    display: "block";
+    bottom:10%;
+    left: 30%;    
+}
+

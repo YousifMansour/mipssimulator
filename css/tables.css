@@ -1,0 +1,90 @@
+@import "detailedTable.css";
+
+table {
+	margin-top: 3%;
+	background-color: white;
+}
+
+#detailedTable.nofullscreen{
+	position: absolute;
+	left: 1%;
+	font-size: 80%;
+	line-height: 130%;
+}
+
+#detailedTable.nofullscreen th,#detailedTable.nofullscreen tr {
+	padding: 0 3px;
+}
+
+#detailedTable.fullscreen{
+	position: absolute;
+	bottom: 3%;
+	line-height: 200%;
+	font-size: 110%;
+}
+
+#registersTable {
+	color: white;
+	/*background-color: #0F0F0F;*/
+	background-color: transparent;
+	position: absolute;
+	top: 5%;
+	right : 2%;
+
+	line-height: 95%;
+
+	position: absolute;
+
+	width: 8%;
+}
+/*
+#registersTable tr th {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}*/
+
+/*#registersTable tr th{
+
+	width: 80%;
+	border: solid red;
+	border-width: 2px;
+
+}
+
+#registersTable tr td{
+
+	width: 80%;
+	border: solid red;
+	border-width: 2px;
+}*/
+
+
+#firsttable {
+
+	border-radius: 10px;
+
+	position: absolute;
+	top: 70%;
+	left : 35%;
+
+}
+
+#secondtable {
+
+	border-radius: 10px;
+
+	position: absolute;
+	top: 70%;
+	left : 45%;
+
+}
+
+#thirdtable {
+
+	border-radius: 10px;
+
+	position: absolute;
+	top: 70%;
+	left : 55%;
+
+}

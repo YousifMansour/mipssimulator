@@ -1,0 +1,219 @@
+button {
+    border-color: transparent;
+    background-color: #171717;
+    background-color: transparent;
+}
+
+#buttonsdiv {
+    margin-left: 1%;
+    margin-right: 1%;
+    /*
+	border: solid blue;
+	border-width: 2px;*/
+    padding-left: 35px;
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+    height: 10%;
+    width: 27%;
+    /*padding: 0 0 0 8%;*/
+}
+
+#colors {
+    display: none;
+}
+
+#speed {
+    display: none;
+}
+
+#redButton {
+    position: absolute;
+    top: 4%;
+    left: 72%;
+    width: 15%;
+    height: 45%;
+    background-color: red;
+    color: red;
+    border: solid red;
+    border: none;
+    cursor: pointer;
+}
+
+#greenButton {
+    position: absolute;
+    top: 4%;
+    left: 89%;
+    width: 15%;
+    height: 45%;
+    background-color: lightgreen;
+    color: lightgreen;
+    border: solid lightgreen;
+    border: none;
+    cursor: pointer;
+}
+
+#blueButton {
+    position: absolute;
+    top: 4%;
+    left: 106%;
+    width: 15%;
+    height: 45%;
+    background-color: cyan;
+    color: cyan;
+    border: solid cyan;
+    border: none;
+    cursor: pointer;
+}
+
+#changeColorButton {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    width: 20%;
+    height: 45%;
+    background-color: #0ff;
+    text-align: center;
+    color: #0ff;
+    display: block;
+    border: none;
+    cursor: pointer;
+}
+
+
+/*
+#changeColorButton:active, #changeSpeedButton:active{
+	background-color: #171717;
+}*/
+
+#changeSpeedButton {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    width: 20%;
+    height: 45%;
+    background-color: #171717;
+    color: white;
+    display: block;
+    border: none;
+    cursor: pointer;
+}
+
+#fastButton {
+    position: absolute;
+    bottom: 0%;
+    left: 106%;
+    width: 15%;
+    height: 45%;
+    color: white;
+    cursor: pointer;
+}
+
+#slowButton {
+    position: absolute;
+    bottom: 0%;
+    left: 89%;
+    width: 15%;
+    height: 45%;
+    color: white;
+    cursor: pointer;
+}
+
+#normalButton {
+    position: absolute;
+    bottom: 0%;
+    left: 72%;
+    width: 15%;
+    height: 45%;
+    padding: 0;
+    margin-left: 0;
+    color: white;
+    cursor: pointer;
+    color: white;
+    cursor: pointer;
+}
+
+#runButton {
+    position: absolute;
+    top: 0px;
+    left: 0%;
+    width: 15%;
+    height: 45%;
+    background-image: url("../res/play.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 45%;
+}
+
+#nextButton {
+    position: absolute;
+    bottom: 0px;
+    left: 17%;
+    width: 15%;
+    height: 45%;
+    background-image: url("../res/next.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+#previousButton {
+    position: absolute;
+    bottom: 0px;
+    left: 0%;
+    width: 15%;
+    height: 45%;
+    background-image: url("../res/previousDisabled.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+#editButton {
+    position: absolute;
+    top: 50%;
+    left: 34%;
+    width: 15%;
+    height: 45%;
+    background-image: url("../res/edit.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#fullScreenButton {
+    position: absolute;
+    top: 0px;
+    left: 17%;
+    width: 15%;
+    height: 45%;
+    background-image: url("../res/fullscreen.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+}
+
+#changeThemeButton {
+    position: absolute;
+    top: 0%;
+    left: 34%;
+    width: 15%;
+    height: 45%;
+    background-color: #171717;
+    color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+}
+
+#soundButton {
+    position: absolute;
+    background-image: url("../res/soundButton.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 60%;
+    top: 0%;
+    left: 72%;
+    width: 15%;
+    height: 45%;
+}
