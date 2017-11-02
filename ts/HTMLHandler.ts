@@ -34,6 +34,7 @@ export class HTMLHandler {
     body: HTMLBodyElement;
     logo: HTMLImageElement;
     fasLogo: HTMLImageElement;
+    github: HTMLImageElement;
 
     isFullScreen: boolean;
     isSoundOn: boolean;
@@ -62,6 +63,8 @@ export class HTMLHandler {
         this.body = <HTMLBodyElement>document.body;
         this.logo = <HTMLImageElement>document.getElementById("logo");
         this.fasLogo = <HTMLImageElement>document.getElementById("fasLogo");
+        this.github = <HTMLImageElement>document.getElementById("github");
+        
 
         this.fastButton = <HTMLButtonElement>document.getElementById("fastButton");
         this.normalButton = <HTMLButtonElement>document.getElementById("normalButton");
@@ -113,6 +116,8 @@ export class HTMLHandler {
             this.footer.style.display = "none";
             this.header.style.display = "none";
             this.fasLogo.style.display = "none";
+            this.github.style.display = "none";
+            // this.githubWhite.style.display = "none";
 
             // this.registersTable.style.display = "none";
 
@@ -168,6 +173,7 @@ export class HTMLHandler {
             this.footer.style.display = "block";
             this.header.style.display = "block";
             this.fasLogo.style.display = "block";
+            this.github.style.display = "block";
 
             // this.previousButton.style.display = "block";
 
