@@ -43,13 +43,13 @@ left arrrow: show previous frame/instruction.
 
 How To Build: 
 -------------------------
-0) Make sure you have npm, tsc, and webpack installed for you operating system.
-1) Open termianl (or cmd) and run npm install. This will install/update node_moduels which are used in the project.
-2) Change directory to ts/. Then run `tsc && webpack`.
+1) Make sure you have npm, tsc, and webpack installed for you operating system.
+2) Open termianl (or cmd) and run npm install. This will install/update node_moduels which are used in the project.
+3) Change directory to ts/. Then run `tsc && webpack`.
 This will run the typescript compiler and then the webpack module bundler. The commands will execute the options in the files "tsconfig.json" and "webpack.config.js". 
-3) The output will be stored in `script/`.
-4) You can now open `index.html` in a browser.
-5) For hosting, only the following folder/files are needed:
+4) The output will be stored in `script/`.
+5) You can now open `index.html` in a browser.
+6) For hosting, only the following folder/files are needed:
     "css", "script", "res", "index.html".
 
 Details:
