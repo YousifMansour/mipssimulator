@@ -1794,9 +1794,6 @@ var MainController = (function () {
                 this.drawingObject.drawDefault();
             }
         }
-        console.log("frameIndex = " + this.frameIndex);
-        console.log(" iteration index = " + this.iterationIndex + " listInOrder length = " + (this.listInOrder.length - 1));
-        console.log(" max frame = " + (this.getTypeObjecet(this.listInOrder[this.iterationIndex][0]).functionsArray.length - 1));
         return this.getTypeObjecet(this.listInOrder[this.iterationIndex][0]).functionsArray[this.frameIndex++];
     };
     MainController.prototype.updateInOrderList = function () {
@@ -3584,26 +3581,198 @@ exports.Console = Console;
 
 exports.__esModule = true;
 __webpack_require__(25);
-var TypeObject_1 = __webpack_require__(5);
 var Animator_1 = __webpack_require__(4);
+var TypeObject_1 = __webpack_require__(5);
 var DrawingClass = (function () {
     function DrawingClass(HTMLHandler, soundController) {
-        this.defaultColor = "white";
+        this.defaultColor = 'white';
         this.audio = false;
         this.lineWidth = 4;
         this.animationSpeed = 500;
         this.color = '#ffff66';
         this.HTMLHandler = HTMLHandler;
         this.animator = new Animator_1.Animator();
-        this.canvas = document.getElementById("canvas");
+        this.canvas = document.getElementById('canvas');
         this.defaultLineWidth = 2;
-        this.brush = this.canvas.getContext("2d");
-        this.Rtype = new TypeObject_1.TypeObject("Rtype", "add, addu, sub, subu, and, or, slt, sltu".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.regDst.bind(this), this.aluOp.bind(this), this.ALUcontrol.bind(this), this.regWrite.bind(this), this.instruction2521.bind(this), this.instruction2016.bind(this), this.instruction2016_1.bind(this), this.instruction1511.bind(this), this.drawMUX1511.bind(this), this.muxToWriteRegister.bind(this), this.registers.bind(this), this.readData1.bind(this), this.readData2.bind(this), this.muxALU.bind(this), this.muxALUtoALUBottom.bind(this), this.instruction150.bind(this), this.instruction50.bind(this), this.aluControlToAluBottom.bind(this), this.aluBottom.bind(this), this.fromALUResult.bind(this), this.toMuxBottomRight.bind(this), this.bottomRightMux.bind(this), this.bottomRightMuxToWriteData.bind(this)], "10", ["1", "0", "X", "1", "0", "0", "0", "10", "0"]);
-        this.Itype = new TypeObject_1.TypeObject("Itype", "addi, addiu, andi, slti, sltiu, ori".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.aluOp.bind(this), this.ALUcontrol.bind(this), this.aluSrc.bind(this), this.regWrite.bind(this), this.instruction2521.bind(this), this.instruction2016.bind(this), this.draw2016toMUX.bind(this), this.drawMUX1511.bind(this), this.muxToWriteRegister.bind(this), this.registers.bind(this), this.readData1.bind(this), this.instruction150.bind(this), this.signExtended.bind(this), this.signExtendToShiftLeftBottom.bind(this), this.signExtendToMUX.bind(this), this.muxALU.bind(this), this.muxALUtoALUBottom.bind(this), this.aluControlToAluBottom.bind(this), this.aluBottom.bind(this), this.fromALUResult.bind(this), this.toMuxBottomRight.bind(this), this.bottomRightMux.bind(this), this.bottomRightMuxToWriteData.bind(this)], "10", ["0", "1", "X", "1", "0", "0", "0", "10", "0"]);
-        this.lw = new TypeObject_1.TypeObject("lw", "lw, lb".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.memRead.bind(this), this.memToReg.bind(this), this.aluOp.bind(this), this.ALUcontrol.bind(this), this.aluSrc.bind(this), this.regWrite.bind(this), this.instruction2521.bind(this), this.instruction2016.bind(this), this.draw2016toMUX.bind(this), this.drawMUX1511.bind(this), this.muxToWriteRegister.bind(this), this.registers.bind(this), this.readData1.bind(this), this.instruction150.bind(this), this.signExtended.bind(this), this.signExtendToShiftLeftBottom.bind(this), this.signExtendToMUX.bind(this), this.muxALU.bind(this), this.muxALUtoALUBottom.bind(this), this.aluControlToAluBottom.bind(this), this.aluBottom.bind(this), this.fromALUResult.bind(this), this.ALUbottomToAddress.bind(this), this.dataMemory.bind(this), this.readDataToMuxBottomRight.bind(this), this.bottomRightMux.bind(this), this.bottomRightMuxToWriteData.bind(this)], "00", ["0", "1", "1", "1", "1", "0", "0", "00", "0"]);
-        this.sw = new TypeObject_1.TypeObject("sw", "sw, sb".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.aluSrc.bind(this), this.memWrite.bind(this), this.aluOp.bind(this), this.ALUcontrol.bind(this), this.instruction2521.bind(this), this.instruction2016.bind(this), this.instruction2016_1.bind(this), this.registers.bind(this), this.readData1.bind(this), this.instruction150.bind(this), this.signExtended.bind(this), this.signExtendToShiftLeftBottom.bind(this), this.signExtendToMUX.bind(this), this.muxALU.bind(this), this.muxALUtoALUBottom.bind(this), this.aluControlToAluBottom.bind(this), this.aluBottom.bind(this), this.fromALUResult.bind(this), this.ALUbottomToAddress.bind(this), this.readData2ToWriteData.bind(this), this.dataMemory.bind(this)], "00", ["x", "1", "X", "0", "0", "1", "0", "00", "0"]);
-        this.beq = new TypeObject_1.TypeObject("beq", "beq, ".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.branch.bind(this), this.aluOp.bind(this), this.ALUcontrol.bind(this), this.instruction2521.bind(this), this.instruction2016.bind(this), this.instruction2016_1.bind(this), this.registers.bind(this), this.readData1.bind(this), this.readData2.bind(this), this.muxALU.bind(this), this.muxALUtoALUBottom.bind(this), this.aluControlToAluBottom.bind(this), this.aluBottom.bind(this), this.zeroToHalfCircle.bind(this), this.HalfCircle.bind(this), this.halfCircleToMux.bind(this), this.instruction150.bind(this), this.signExtended.bind(this), this.signExtendToShiftLeftBottom.bind(this), this.toShiftLeft2.bind(this), this.shiftLeftBottom.bind(this), this.shiftLeft2ToALUTop.bind(this), this.toADD.bind(this), this.add4.bind(this), this.drawADD.bind(this), this.addToMux_1.bind(this), this.aluTop.bind(this), this.topALUToMux.bind(this), this.halfCircleMUX.bind(this), this.muxToMux.bind(this), this.topRightMUX.bind(this), this.MuxToPC.bind(this)], "01", ["X", "0", "X", "0", "0", "0", "1", "01", "0"]);
-        this.j = new TypeObject_1.TypeObject("j", "j, ".split(", "), [this.PC.bind(this), this.fromPC.bind(this), this.readAddress.bind(this), this.fromReadAddress.bind(this), this.instruction3126.bind(this), this.drawControl.bind(this), this.jump.bind(this), this.instruction250.bind(this), this.shiftLeft2.bind(this), this.fromJumpAddress.bind(this), this.toADD.bind(this), this.add4.bind(this), this.drawADD.bind(this), this.addToJumpAddress.bind(this), this.jumpAddress310.bind(this), this.topRightMUX.bind(this), this.MuxToPC.bind(this)], "XX", ["X", "X", "X", "0", "0", "0", "X", "XX", "1"]);
+        this.brush = this.canvas.getContext('2d');
+        this.Rtype = new TypeObject_1.TypeObject('Rtype', 'add, addu, sub, subu, and, or, slt, sltu'.split(', '), [
+            this.PC.bind(this),
+            this.fromPC.bind(this),
+            this.readAddress.bind(this),
+            this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this),
+            this.drawControl.bind(this),
+            this.regDst.bind(this),
+            this.aluOp.bind(this),
+            this.ALUcontrol.bind(this),
+            this.regWrite.bind(this),
+            this.instruction2521.bind(this),
+            this.instruction2016.bind(this),
+            this.instruction2016_1.bind(this),
+            this.instruction1511.bind(this),
+            this.drawMUX1511.bind(this),
+            this.muxToWriteRegister.bind(this),
+            this.registers.bind(this),
+            this.readData1.bind(this),
+            this.readData2.bind(this),
+            this.muxALU.bind(this),
+            this.muxALUtoALUBottom.bind(this),
+            this.instruction150.bind(this),
+            this.instruction50.bind(this),
+            this.aluControlToAluBottom.bind(this),
+            this.aluBottom.bind(this),
+            this.fromALUResult.bind(this),
+            this.toMuxBottomRight.bind(this),
+            this.bottomRightMux.bind(this),
+            this.bottomRightMuxToWriteData.bind(this)
+        ], '10', ['1', '0', 'X', '1', '0', '0', '0', '10', '0']);
+        this.Itype = new TypeObject_1.TypeObject('Itype', 'addi, addiu, andi, slti, sltiu, ori'.split(', '), [
+            this.PC.bind(this),
+            this.fromPC.bind(this),
+            this.readAddress.bind(this),
+            this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this),
+            this.drawControl.bind(this),
+            this.aluOp.bind(this),
+            this.ALUcontrol.bind(this),
+            this.aluSrc.bind(this),
+            this.regWrite.bind(this),
+            this.instruction2521.bind(this),
+            this.instruction2016.bind(this),
+            this.draw2016toMUX.bind(this),
+            this.drawMUX1511.bind(this),
+            this.muxToWriteRegister.bind(this),
+            this.registers.bind(this),
+            this.readData1.bind(this),
+            this.instruction150.bind(this),
+            this.signExtended.bind(this),
+            this.signExtendToShiftLeftBottom.bind(this),
+            this.signExtendToMUX.bind(this),
+            this.muxALU.bind(this),
+            this.muxALUtoALUBottom.bind(this),
+            this.aluControlToAluBottom.bind(this),
+            this.aluBottom.bind(this),
+            this.fromALUResult.bind(this),
+            this.toMuxBottomRight.bind(this),
+            this.bottomRightMux.bind(this),
+            this.bottomRightMuxToWriteData.bind(this)
+        ], '10', ['0', '1', 'X', '1', '0', '0', '0', '10', '0']);
+        this.lw = new TypeObject_1.TypeObject('lw', 'lw, lb'.split(', '), [
+            this.PC.bind(this),
+            this.fromPC.bind(this),
+            this.readAddress.bind(this),
+            this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this),
+            this.drawControl.bind(this),
+            this.memRead.bind(this),
+            this.memToReg.bind(this),
+            this.aluOp.bind(this),
+            this.ALUcontrol.bind(this),
+            this.aluSrc.bind(this),
+            this.regWrite.bind(this),
+            this.instruction2521.bind(this),
+            this.instruction2016.bind(this),
+            this.draw2016toMUX.bind(this),
+            this.drawMUX1511.bind(this),
+            this.muxToWriteRegister.bind(this),
+            this.registers.bind(this),
+            this.readData1.bind(this),
+            this.instruction150.bind(this),
+            this.signExtended.bind(this),
+            this.signExtendToShiftLeftBottom.bind(this),
+            this.signExtendToMUX.bind(this),
+            this.muxALU.bind(this),
+            this.muxALUtoALUBottom.bind(this),
+            this.aluControlToAluBottom.bind(this),
+            this.aluBottom.bind(this),
+            this.fromALUResult.bind(this),
+            this.ALUbottomToAddress.bind(this),
+            this.dataMemory.bind(this),
+            this.readDataToMuxBottomRight.bind(this),
+            this.bottomRightMux.bind(this),
+            this.bottomRightMuxToWriteData.bind(this)
+        ], '00', [
+            '0', '1', '1', '1', '1', '0', '0', '00', '0'
+        ]);
+        this.sw = new TypeObject_1.TypeObject('sw', 'sw, sb'.split(', '), [
+            this.PC.bind(this),
+            this.fromPC.bind(this),
+            this.readAddress.bind(this),
+            this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this),
+            this.drawControl.bind(this),
+            this.aluSrc.bind(this),
+            this.memWrite.bind(this),
+            this.aluOp.bind(this),
+            this.ALUcontrol.bind(this),
+            this.instruction2521.bind(this),
+            this.instruction2016.bind(this),
+            this.instruction2016_1.bind(this),
+            this.registers.bind(this),
+            this.readData1.bind(this),
+            this.instruction150.bind(this),
+            this.signExtended.bind(this),
+            this.signExtendToShiftLeftBottom.bind(this),
+            this.signExtendToMUX.bind(this),
+            this.muxALU.bind(this),
+            this.muxALUtoALUBottom.bind(this),
+            this.aluControlToAluBottom.bind(this),
+            this.aluBottom.bind(this),
+            this.fromALUResult.bind(this),
+            this.ALUbottomToAddress.bind(this),
+            this.readData2ToWriteData.bind(this),
+            this.dataMemory.bind(this)
+        ], '00', ['x', '1', 'X', '0', '0', '1', '0', '00', '0']);
+        this.beq = new TypeObject_1.TypeObject('beq', 'beq, '.split(', '), [
+            this.PC.bind(this),
+            this.fromPC.bind(this),
+            this.readAddress.bind(this),
+            this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this),
+            this.drawControl.bind(this),
+            this.branch.bind(this),
+            this.aluOp.bind(this),
+            this.ALUcontrol.bind(this),
+            this.instruction2521.bind(this),
+            this.instruction2016.bind(this),
+            this.instruction2016_1.bind(this),
+            this.registers.bind(this),
+            this.readData1.bind(this),
+            this.readData2.bind(this),
+            this.muxALU.bind(this),
+            this.muxALUtoALUBottom.bind(this),
+            this.aluControlToAluBottom.bind(this),
+            this.aluBottom.bind(this),
+            this.zeroToHalfCircle.bind(this),
+            this.HalfCircle.bind(this),
+            this.halfCircleToMux.bind(this),
+            this.instruction150.bind(this),
+            this.signExtended.bind(this),
+            this.signExtendToShiftLeftBottom.bind(this),
+            this.toShiftLeft2.bind(this),
+            this.shiftLeftBottom.bind(this),
+            this.shiftLeft2ToALUTop.bind(this),
+            this.toADD.bind(this),
+            this.add4.bind(this),
+            this.drawADD.bind(this),
+            this.addToMux_1.bind(this),
+            this.aluTop.bind(this),
+            this.topALUToMux.bind(this),
+            this.halfCircleMUX.bind(this),
+            this.muxToMux.bind(this),
+            this.topRightMUX.bind(this),
+            this.MuxToPC.bind(this)
+        ], '01', ['X', '0', 'X', '0', '0', '0', '1', '01', '0']);
+        this.j = new TypeObject_1.TypeObject('j', 'j, '.split(', '), [
+            this.PC.bind(this), this.fromPC.bind(this),
+            this.readAddress.bind(this), this.fromReadAddress.bind(this),
+            this.instruction3126.bind(this), this.drawControl.bind(this),
+            this.jump.bind(this), this.instruction250.bind(this),
+            this.shiftLeft2.bind(this), this.fromJumpAddress.bind(this),
+            this.toADD.bind(this), this.add4.bind(this), this.drawADD.bind(this),
+            this.addToJumpAddress.bind(this), this.jumpAddress310.bind(this),
+            this.topRightMUX.bind(this), this.MuxToPC.bind(this)
+        ], 'XX', ['X', 'X', 'X', '0', '0', '0', 'X', 'XX', '1']);
         this.typeObjectArray = new Array();
         this.typeObjectArray[0] = this.Rtype;
         this.typeObjectArray[1] = this.Itype;
@@ -3612,7 +3781,7 @@ var DrawingClass = (function () {
         this.typeObjectArray[4] = this.beq;
         this.typeObjectArray[5] = this.j;
         this.soundController = soundController;
-        console.log("Drawing Object constructed");
+        console.log('Drawing Object constructed');
     }
     DrawingClass.prototype.setAudio = function (playing) {
         this.audio = playing;
@@ -3633,36 +3802,48 @@ var DrawingClass = (function () {
         console.log(instruction);
         var functionToDraw;
         var numberOfFunctions;
-        if (instruction == "")
+        if (instruction == '')
             return;
         var arrayToSend = [];
         if (this.Rtype.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.Rtype); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.Rtype);
+            }.bind(this);
             numberOfFunctions = this.Rtype.getNumberOfFunctions();
             arrayToSend = this.Rtype.controlSingals;
         }
         else if (this.Itype.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.Itype); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.Itype);
+            }.bind(this);
             numberOfFunctions = this.Itype.getNumberOfFunctions();
             arrayToSend = this.Itype.controlSingals;
         }
         else if (this.lw.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.lw); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.lw);
+            }.bind(this);
             numberOfFunctions = this.lw.getNumberOfFunctions();
             arrayToSend = this.lw.controlSingals;
         }
         else if (this.sw.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.sw); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.sw);
+            }.bind(this);
             numberOfFunctions = this.sw.getNumberOfFunctions();
             arrayToSend = this.sw.controlSingals;
         }
         else if (this.beq.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.beq); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.beq);
+            }.bind(this);
             numberOfFunctions = this.beq.getNumberOfFunctions();
             arrayToSend = this.beq.controlSingals;
         }
         else if (this.j.isThisType(instruction)) {
-            functionToDraw = function () { this.draw(this.j); }.bind(this);
+            functionToDraw = function () {
+                this.draw(this.j);
+            }.bind(this);
             numberOfFunctions = this.j.getNumberOfFunctions();
             arrayToSend = this.j.controlSingals;
         }
@@ -3690,7 +3871,7 @@ var DrawingClass = (function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.pc);
         this.brush.strokeRect(0.034 * this.canvas.width, 0.482 * this.canvas.height, 0.035 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("PC", 0.04 * this.canvas.width, 0.560 * this.canvas.height);
+        this.brush.fillText('PC', 0.04 * this.canvas.width, 0.560 * this.canvas.height);
     };
     DrawingClass.prototype.fromPC = function () {
         this.brush.beginPath();
@@ -3721,26 +3902,26 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.162 * this.canvas.width, 0.117 * this.canvas.height);
         this.brush.lineTo(0.124 * this.canvas.width, 0.082 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("Add", 0.133 * this.canvas.width, 0.13 * this.canvas.height);
+        this.brush.fillText('Add', 0.133 * this.canvas.width, 0.13 * this.canvas.height);
     };
     DrawingClass.prototype.topRightMUX = function () {
         this.brush.strokeRect(0.933 * this.canvas.width, 0.078 * this.canvas.height, 0.028 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("1", 0.936 * this.canvas.width, 0.103 * this.canvas.height);
-        this.brush.fillText("M", 0.937 * this.canvas.width, 0.131 * this.canvas.height);
-        this.brush.fillText("u", 0.939 * this.canvas.width, 0.154 * this.canvas.height);
-        this.brush.fillText("x", 0.939 * this.canvas.width, 0.177 * this.canvas.height);
-        this.brush.fillText("0", 0.936 * this.canvas.width, 0.200 * this.canvas.height);
+        this.brush.fillText('1', 0.936 * this.canvas.width, 0.103 * this.canvas.height);
+        this.brush.fillText('M', 0.937 * this.canvas.width, 0.131 * this.canvas.height);
+        this.brush.fillText('u', 0.939 * this.canvas.width, 0.154 * this.canvas.height);
+        this.brush.fillText('x', 0.939 * this.canvas.width, 0.177 * this.canvas.height);
+        this.brush.fillText('0', 0.936 * this.canvas.width, 0.200 * this.canvas.height);
     };
     DrawingClass.prototype.readAddress = function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.readAddress);
         this.brush.strokeRect(0.102 * this.canvas.width, 0.528 * this.canvas.height, 0.081 * this.canvas.width, 0.206 * this.canvas.height);
-        this.brush.fillText("Read", 0.108 * this.canvas.width, 0.551 * this.canvas.height);
-        this.brush.fillText("Address", 0.108 * this.canvas.width, 0.574 * this.canvas.height);
-        this.brush.fillText("Instructions", 0.103 * this.canvas.width, 0.620 * this.canvas.height);
-        this.brush.fillText("[31-0]", 0.140 * this.canvas.width, 0.643 * this.canvas.height);
-        this.brush.fillText("Instruction", 0.103 * this.canvas.width, 0.689 * this.canvas.height);
-        this.brush.fillText("memory", 0.108 * this.canvas.width, 0.712 * this.canvas.height);
+        this.brush.fillText('Read', 0.108 * this.canvas.width, 0.551 * this.canvas.height);
+        this.brush.fillText('Address', 0.108 * this.canvas.width, 0.574 * this.canvas.height);
+        this.brush.fillText('Instructions', 0.103 * this.canvas.width, 0.620 * this.canvas.height);
+        this.brush.fillText('[31-0]', 0.140 * this.canvas.width, 0.643 * this.canvas.height);
+        this.brush.fillText('Instruction', 0.103 * this.canvas.width, 0.689 * this.canvas.height);
+        this.brush.fillText('memory', 0.108 * this.canvas.width, 0.712 * this.canvas.height);
     };
     DrawingClass.prototype.fromReadAddress = function () {
         this.brush.beginPath();
@@ -3751,7 +3932,7 @@ var DrawingClass = (function () {
     DrawingClass.prototype.instruction2016 = function (stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250) {
         var text = instruction2016;
         if (text == undefined)
-            text = "";
+            text = '';
         this.brush.beginPath();
         this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.198 * this.canvas.width, 0.586 * this.canvas.height);
@@ -3767,11 +3948,11 @@ var DrawingClass = (function () {
         this.drawArrow(0.345 * this.canvas.width, 0.586 * this.canvas.height);
     };
     DrawingClass.prototype.instruction2521 = function (stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250) {
-        var text = "";
+        var text = '';
         if (this.brush.lineWidth != this.defaultLineWidth)
             text = instruction2521;
         if (text == undefined)
-            text = "";
+            text = '';
         this.brush.beginPath();
         this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.198 * this.canvas.width, 0.54 * this.canvas.height);
@@ -3781,23 +3962,28 @@ var DrawingClass = (function () {
         this.brush.fillText(text, 0.201 * this.canvas.width, 0.526 * this.canvas.height);
     };
     DrawingClass.prototype.instruction3126 = function (stringALU, instruction3126, instruction2531, instruction2016, instruction1511, instruction150, instruction250) {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         var str = stringALU;
-        var text = "";
+        var text = '';
         if (this.brush.lineWidth != this.defaultLineWidth)
             text = instruction3126;
         if (text == undefined)
-            text = "";
+            text = '';
         this.brush.beginPath();
         this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.198 * this.canvas.width, 0.372 * this.canvas.height);
         this.brush.lineTo(0.296 * this.canvas.width, 0.372 * this.canvas.height);
         this.brush.stroke();
         this.drawArrow(0.296 * this.canvas.width, 0.372 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
         this.brush.fillText(text, 0.198 * this.canvas.width, 0.354 * this.canvas.height);
     };
     DrawingClass.prototype.instruction1511 = function (stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250) {
         if (instruction1511 == undefined)
-            instruction1511 = "";
+            instruction1511 = '';
         this.brush.beginPath();
         this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.198 * this.canvas.width, 0.678 * this.canvas.height);
@@ -3808,7 +3994,7 @@ var DrawingClass = (function () {
     };
     DrawingClass.prototype.instruction150 = function (stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250) {
         if (instruction150 == undefined)
-            instruction150 = "";
+            instruction150 = '';
         this.brush.beginPath();
         this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.198 * this.canvas.width, 0.816 * this.canvas.height);
@@ -3820,11 +4006,11 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.362 * this.canvas.width, 0.827 * this.canvas.height);
         this.brush.stroke();
         this.brush.fillText(instruction150, 0.201 * this.canvas.width, 0.804 * this.canvas.height);
-        this.brush.fillText("16", 0.351 * this.canvas.width, 0.802 * this.canvas.height);
+        this.brush.fillText('16', 0.351 * this.canvas.width, 0.802 * this.canvas.height);
     };
     DrawingClass.prototype.instruction250 = function (stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250) {
         if (instruction250 == undefined)
-            instruction250 = "";
+            instruction250 = '';
         this.brush.beginPath();
         this.brush.moveTo(0.189 * this.canvas.width, 0.632 * this.canvas.height);
         this.brush.lineTo(0.189 * this.canvas.width, 0.078 * this.canvas.height);
@@ -3836,23 +4022,28 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.291 * this.canvas.width, 0.087 * this.canvas.height);
         this.brush.stroke();
         this.brush.fillText(instruction250, 0.217 * this.canvas.width, 0.058 * this.canvas.height);
-        this.brush.fillText("26", 0.27 * this.canvas.width, 0.099 * this.canvas.height);
+        this.brush.fillText('26', 0.27 * this.canvas.width, 0.099 * this.canvas.height);
     };
     DrawingClass.prototype.drawControl = function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.drawControl);
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.ellipse(0.349 * this.canvas.width, 0.356 * this.canvas.height, 0.037 * this.canvas.width, 0.137 * this.canvas.height, 0, 0, 2 * Math.PI);
         this.brush.stroke();
-        this.brush.fillText("Control", 0.325 * this.canvas.width, 0.379 * this.canvas.height);
+        this.brush.fillText('Control', 0.325 * this.canvas.width, 0.379 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.drawMUX1511 = function () {
         this.brush.strokeRect(0.308 * this.canvas.width, 0.610 * this.canvas.height, 0.035 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("0", 0.318 * this.canvas.width, 0.645 * this.canvas.height);
-        this.brush.fillText("M", 0.318 * this.canvas.width, 0.670 * this.canvas.height);
-        this.brush.fillText("u", 0.318 * this.canvas.width, 0.691 * this.canvas.height);
-        this.brush.fillText("x", 0.318 * this.canvas.width, 0.710 * this.canvas.height);
-        this.brush.fillText("1", 0.318 * this.canvas.width, 0.733 * this.canvas.height);
+        this.brush.fillText('0', 0.318 * this.canvas.width, 0.645 * this.canvas.height);
+        this.brush.fillText('M', 0.318 * this.canvas.width, 0.670 * this.canvas.height);
+        this.brush.fillText('u', 0.318 * this.canvas.width, 0.691 * this.canvas.height);
+        this.brush.fillText('x', 0.318 * this.canvas.width, 0.710 * this.canvas.height);
+        this.brush.fillText('1', 0.318 * this.canvas.width, 0.733 * this.canvas.height);
     };
     DrawingClass.prototype.draw2016toMUX = function () {
         this.brush.beginPath();
@@ -3866,8 +4057,8 @@ var DrawingClass = (function () {
         this.brush.beginPath();
         this.brush.ellipse(0.406 * this.canvas.width, 0.820 * this.canvas.height, 0.027 * this.canvas.width, 0.057 * this.canvas.height, 0, 0, 2 * Math.PI);
         this.brush.stroke();
-        this.brush.fillText("Sign-", 0.392 * this.canvas.width, 0.813 * this.canvas.height);
-        this.brush.fillText("extended", 0.38 * this.canvas.width, 0.836 * this.canvas.height);
+        this.brush.fillText('Sign-', 0.392 * this.canvas.width, 0.813 * this.canvas.height);
+        this.brush.fillText('extended', 0.38 * this.canvas.width, 0.836 * this.canvas.height);
     };
     DrawingClass.prototype.muxToWriteRegister = function () {
         if (this.audio)
@@ -3882,19 +4073,19 @@ var DrawingClass = (function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.registers);
         this.brush.strokeRect(0.358 * this.canvas.width, 0.517 * this.canvas.height, 0.118 * this.canvas.width, 0.229 * this.canvas.height);
-        this.brush.fillText("Read", 0.365 * this.canvas.width, 0.54 * this.canvas.height);
-        this.brush.fillText("register 1", 0.365 * this.canvas.width, 0.563 * this.canvas.height);
-        this.brush.fillText("Read", 0.365 * this.canvas.width, 0.586 * this.canvas.height);
-        this.brush.fillText("register 2", 0.365 * this.canvas.width, 0.609 * this.canvas.height);
-        this.brush.fillText("Write", 0.365 * this.canvas.width, 0.655 * this.canvas.height);
-        this.brush.fillText("register", 0.365 * this.canvas.width, 0.678 * this.canvas.height);
-        this.brush.fillText("Write", 0.365 * this.canvas.width, 0.717 * this.canvas.height);
-        this.brush.fillText("data", 0.365 * this.canvas.width, 0.74 * this.canvas.height);
-        this.brush.fillText("Read", 0.434 * this.canvas.width, 0.572 * this.canvas.height);
-        this.brush.fillText("data 1", 0.432 * this.canvas.width, 0.595 * this.canvas.height);
-        this.brush.fillText("Read", 0.434 * this.canvas.width, 0.664 * this.canvas.height);
-        this.brush.fillText("data 2", 0.432 * this.canvas.width, 0.687 * this.canvas.height);
-        this.brush.fillText("Registers", 0.405 * this.canvas.width, 0.735 * this.canvas.height);
+        this.brush.fillText('Read', 0.365 * this.canvas.width, 0.54 * this.canvas.height);
+        this.brush.fillText('register 1', 0.365 * this.canvas.width, 0.563 * this.canvas.height);
+        this.brush.fillText('Read', 0.365 * this.canvas.width, 0.586 * this.canvas.height);
+        this.brush.fillText('register 2', 0.365 * this.canvas.width, 0.609 * this.canvas.height);
+        this.brush.fillText('Write', 0.365 * this.canvas.width, 0.655 * this.canvas.height);
+        this.brush.fillText('register', 0.365 * this.canvas.width, 0.678 * this.canvas.height);
+        this.brush.fillText('Write', 0.365 * this.canvas.width, 0.717 * this.canvas.height);
+        this.brush.fillText('data', 0.365 * this.canvas.width, 0.74 * this.canvas.height);
+        this.brush.fillText('Read', 0.434 * this.canvas.width, 0.572 * this.canvas.height);
+        this.brush.fillText('data 1', 0.432 * this.canvas.width, 0.595 * this.canvas.height);
+        this.brush.fillText('Read', 0.434 * this.canvas.width, 0.664 * this.canvas.height);
+        this.brush.fillText('data 2', 0.432 * this.canvas.width, 0.687 * this.canvas.height);
+        this.brush.fillText('Registers', 0.405 * this.canvas.width, 0.735 * this.canvas.height);
     };
     DrawingClass.prototype.shiftLeft2 = function () {
         if (this.audio)
@@ -3902,10 +4093,13 @@ var DrawingClass = (function () {
         this.brush.beginPath();
         this.brush.ellipse(0.336 * this.canvas.width, 0.08 * this.canvas.height, 0.026 * this.canvas.width, 0.041 * this.canvas.height, 0, 0, 2 * Math.PI);
         this.brush.stroke();
-        this.brush.fillText("Shift", 0.32 * this.canvas.width, 0.071 * this.canvas.height);
-        this.brush.fillText("left 2", 0.318 * this.canvas.width, 0.098 * this.canvas.height);
+        this.brush.fillText('Shift', 0.32 * this.canvas.width, 0.071 * this.canvas.height);
+        this.brush.fillText('left 2', 0.318 * this.canvas.width, 0.098 * this.canvas.height);
     };
     DrawingClass.prototype.regDst = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.regDst);
         this.brush.beginPath();
@@ -3917,9 +4111,14 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.325 * this.canvas.width, 0.758 * this.canvas.height);
         this.brush.lineTo(0.325 * this.canvas.width, 0.748 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("RegDst", 0.397 * this.canvas.width, 0.248 * this.canvas.height);
+        this.brush.fillText('RegDst', 0.397 * this.canvas.width, 0.248 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.jump = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.jump);
         this.brush.beginPath();
@@ -3929,7 +4128,9 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.948 * this.canvas.width, 0.045 * this.canvas.height);
         this.brush.lineTo(0.948 * this.canvas.width, 0.078 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("Jump", 0.398 * this.canvas.width, 0.275 * this.canvas.height);
+        this.brush.fillText('Jump', 0.398 * this.canvas.width, 0.275 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.readData1 = function () {
         if (this.audio)
@@ -3961,13 +4162,13 @@ var DrawingClass = (function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.dataMemory);
         this.brush.strokeRect(0.755 * this.canvas.width, 0.597 * this.canvas.height, 0.118 * this.canvas.width, 0.29 * this.canvas.height);
-        this.brush.fillText("Address", 0.762 * this.canvas.width, 0.643 * this.canvas.height);
-        this.brush.fillText("Read", 0.829 * this.canvas.width, 0.636 * this.canvas.height);
-        this.brush.fillText("data", 0.835 * this.canvas.width, 0.659 * this.canvas.height);
-        this.brush.fillText("Write", 0.762 * this.canvas.width, 0.754 * this.canvas.height);
-        this.brush.fillText("data", 0.762 * this.canvas.width, 0.777 * this.canvas.height);
-        this.brush.fillText("Data", 0.822 * this.canvas.width, 0.770 * this.canvas.height);
-        this.brush.fillText("memory", 0.814 * this.canvas.width, 0.793 * this.canvas.height);
+        this.brush.fillText('Address', 0.762 * this.canvas.width, 0.643 * this.canvas.height);
+        this.brush.fillText('Read', 0.829 * this.canvas.width, 0.636 * this.canvas.height);
+        this.brush.fillText('data', 0.835 * this.canvas.width, 0.659 * this.canvas.height);
+        this.brush.fillText('Write', 0.762 * this.canvas.width, 0.754 * this.canvas.height);
+        this.brush.fillText('data', 0.762 * this.canvas.width, 0.777 * this.canvas.height);
+        this.brush.fillText('Data', 0.822 * this.canvas.width, 0.770 * this.canvas.height);
+        this.brush.fillText('memory', 0.814 * this.canvas.width, 0.793 * this.canvas.height);
     };
     DrawingClass.prototype.instruction50 = function () {
         this.brush.beginPath();
@@ -3978,14 +4179,19 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.536 * this.canvas.width, 0.839 * this.canvas.height);
         this.brush.stroke();
         this.drawArrow(0.536 * this.canvas.width, 0.839 * this.canvas.height);
-        this.brush.fillText("Instruction [5-0]", 0.362 * this.canvas.width, 0.912 * this.canvas.height);
+        this.brush.fillText('Instruction [5-0]', 0.362 * this.canvas.width, 0.912 * this.canvas.height);
     };
     DrawingClass.prototype.ALUcontrol = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.ellipse(0.58 * this.canvas.width, 0.845 * this.canvas.height, 0.032 * this.canvas.width, 0.064 * this.canvas.height, 0, 0, 2 * Math.PI);
         this.brush.stroke();
-        this.brush.fillText("ALU", 0.565 * this.canvas.width, 0.843 * this.canvas.height);
-        this.brush.fillText("control", 0.56 * this.canvas.width, 0.866 * this.canvas.height);
+        this.brush.fillText('ALU', 0.565 * this.canvas.width, 0.843 * this.canvas.height);
+        this.brush.fillText('control', 0.56 * this.canvas.width, 0.866 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.aluBottom = function () {
         if (this.audio)
@@ -4000,20 +4206,25 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.691 * this.canvas.width, 0.574 * this.canvas.height);
         this.brush.lineTo(0.588 * this.canvas.width, 0.528 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("ALU", 0.614 * this.canvas.width, 0.632 * this.canvas.height);
-        this.brush.fillText("Zero", 0.651 * this.canvas.width, 0.597 * this.canvas.height);
-        this.brush.fillText("ALU", 0.651 * this.canvas.width, 0.643 * this.canvas.height);
-        this.brush.fillText("result", 0.644 * this.canvas.width, 0.666 * this.canvas.height);
+        this.brush.fillText('ALU', 0.614 * this.canvas.width, 0.632 * this.canvas.height);
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
+        this.brush.fillText('Zero', 0.651 * this.canvas.width, 0.597 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
+        this.brush.fillText('ALU', 0.651 * this.canvas.width, 0.643 * this.canvas.height);
+        this.brush.fillText('result', 0.644 * this.canvas.width, 0.666 * this.canvas.height);
     };
     DrawingClass.prototype.muxALU = function () {
         if (this.audio)
             this.soundController.playSound(ttsConfig.muxALU);
         this.brush.strokeRect(0.533 * this.canvas.width, 0.6 * this.canvas.height, 0.028 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("0", 0.540 * this.canvas.width, 0.640 * this.canvas.height);
-        this.brush.fillText("M", 0.540 * this.canvas.width, 0.665 * this.canvas.height);
-        this.brush.fillText("u", 0.540 * this.canvas.width, 0.686 * this.canvas.height);
-        this.brush.fillText("x", 0.540 * this.canvas.width, 0.706 * this.canvas.height);
-        this.brush.fillText("1", 0.540 * this.canvas.width, 0.728 * this.canvas.height);
+        this.brush.fillText('0', 0.540 * this.canvas.width, 0.640 * this.canvas.height);
+        this.brush.fillText('M', 0.540 * this.canvas.width, 0.665 * this.canvas.height);
+        this.brush.fillText('u', 0.540 * this.canvas.width, 0.686 * this.canvas.height);
+        this.brush.fillText('x', 0.540 * this.canvas.width, 0.706 * this.canvas.height);
+        this.brush.fillText('1', 0.540 * this.canvas.width, 0.728 * this.canvas.height);
     };
     DrawingClass.prototype.muxALUtoALUBottom = function () {
         if (this.audio)
@@ -4056,11 +4267,11 @@ var DrawingClass = (function () {
     };
     DrawingClass.prototype.bottomRightMux = function () {
         this.brush.strokeRect(0.906 * this.canvas.width, 0.590 * this.canvas.height, 0.028 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("1", 0.915 * this.canvas.width, 0.609 * this.canvas.height);
-        this.brush.fillText("M", 0.915 * this.canvas.width, 0.636 * this.canvas.height);
-        this.brush.fillText("u", 0.918 * this.canvas.width, 0.659 * this.canvas.height);
-        this.brush.fillText("x", 0.918 * this.canvas.width, 0.682 * this.canvas.height);
-        this.brush.fillText("0", 0.915 * this.canvas.width, 0.705 * this.canvas.height);
+        this.brush.fillText('1', 0.915 * this.canvas.width, 0.609 * this.canvas.height);
+        this.brush.fillText('M', 0.915 * this.canvas.width, 0.636 * this.canvas.height);
+        this.brush.fillText('u', 0.918 * this.canvas.width, 0.659 * this.canvas.height);
+        this.brush.fillText('x', 0.918 * this.canvas.width, 0.682 * this.canvas.height);
+        this.brush.fillText('0', 0.915 * this.canvas.width, 0.705 * this.canvas.height);
     };
     DrawingClass.prototype.bottomRightMuxToWriteData = function () {
         if (this.audio)
@@ -4081,7 +4292,7 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.111 * this.canvas.width, 0.167 * this.canvas.height);
         this.brush.stroke();
         this.drawArrow(0.111 * this.canvas.width, 0.167 * this.canvas.height);
-        this.brush.fillText("4", 0.087 * this.canvas.width, 0.172 * this.canvas.height);
+        this.brush.fillText('4', 0.087 * this.canvas.width, 0.172 * this.canvas.height);
     };
     DrawingClass.prototype.signExtendToShiftLeftBottom = function () {
         if (this.audio)
@@ -4093,7 +4304,7 @@ var DrawingClass = (function () {
         this.brush.moveTo(0.465 * this.canvas.width, 0.812 * this.canvas.height);
         this.brush.lineTo(0.474 * this.canvas.width, 0.827 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("32", 0.463 * this.canvas.width, 0.802 * this.canvas.height);
+        this.brush.fillText('32', 0.463 * this.canvas.width, 0.802 * this.canvas.height);
     };
     DrawingClass.prototype.signExtendToMUX = function () {
         if (this.audio)
@@ -4116,10 +4327,13 @@ var DrawingClass = (function () {
         this.brush.beginPath();
         this.brush.ellipse(0.552 * this.canvas.width, 0.27 * this.canvas.height, 0.035 * this.canvas.height, 0.041 * this.canvas.height, 0, 0, 2 * Math.PI);
         this.brush.stroke();
-        this.brush.fillText("Shift", 0.544 * this.canvas.width, 0.265 * this.canvas.height);
-        this.brush.fillText("left 2", 0.544 * this.canvas.width, 0.285 * this.canvas.height);
+        this.brush.fillText('Shift', 0.544 * this.canvas.width, 0.265 * this.canvas.height);
+        this.brush.fillText('left 2', 0.544 * this.canvas.width, 0.285 * this.canvas.height);
     };
     DrawingClass.prototype.HalfCircle = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.moveTo(0.77 * this.canvas.width, 0.333 * this.canvas.height);
         this.brush.lineTo(0.755 * this.canvas.width, 0.333 * this.canvas.height);
@@ -4127,16 +4341,26 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.77 * this.canvas.width, 0.268 * this.canvas.height);
         this.brush.arc(0.77 * this.canvas.width, 0.301 * this.canvas.height, 0.0321 * this.canvas.height, 1.5 * Math.PI, Math.PI / 2);
         this.brush.stroke();
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.zeroToHalfCircle = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.moveTo(0.691 * this.canvas.width, 0.586 * this.canvas.height);
         this.brush.lineTo(0.718 * this.canvas.width, 0.586 * this.canvas.height);
         this.brush.lineTo(0.718 * this.canvas.width, 0.321 * this.canvas.height);
         this.brush.lineTo(0.755 * this.canvas.width, 0.321 * this.canvas.height);
         this.brush.stroke();
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.branch = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.branch);
         this.brush.beginPath();
@@ -4145,24 +4369,34 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.696 * this.canvas.width, 0.275 * this.canvas.height);
         this.brush.lineTo(0.755 * this.canvas.width, 0.275 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("Branch", 0.398 * this.canvas.width, 0.31 * this.canvas.height);
+        this.brush.fillText('Branch', 0.398 * this.canvas.width, 0.31 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.halfCircleToMux = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.moveTo(0.785 * this.canvas.width, 0.298 * this.canvas.height);
         this.brush.lineTo(0.82 * this.canvas.width, 0.298 * this.canvas.height);
         this.brush.lineTo(0.82 * this.canvas.width, 0.229 * this.canvas.height);
         this.brush.stroke();
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.halfCircleMUX = function () {
         this.brush.strokeRect(0.807 * this.canvas.width, 0.093 * this.canvas.height, 0.028 * this.canvas.width, 0.137 * this.canvas.height);
-        this.brush.fillText("0", 0.817 * this.canvas.width, 0.115 * this.canvas.height);
-        this.brush.fillText("M", 0.819 * this.canvas.width, 0.143 * this.canvas.height);
-        this.brush.fillText("u", 0.820 * this.canvas.width, 0.166 * this.canvas.height);
-        this.brush.fillText("x", 0.820 * this.canvas.width, 0.189 * this.canvas.height);
-        this.brush.fillText("1", 0.817 * this.canvas.width, 0.212 * this.canvas.height);
+        this.brush.fillText('0', 0.817 * this.canvas.width, 0.115 * this.canvas.height);
+        this.brush.fillText('M', 0.819 * this.canvas.width, 0.143 * this.canvas.height);
+        this.brush.fillText('u', 0.820 * this.canvas.width, 0.166 * this.canvas.height);
+        this.brush.fillText('x', 0.820 * this.canvas.width, 0.189 * this.canvas.height);
+        this.brush.fillText('1', 0.817 * this.canvas.width, 0.212 * this.canvas.height);
     };
     DrawingClass.prototype.memRead = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.memRead);
         this.brush.beginPath();
@@ -4172,9 +4406,14 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.814 * this.canvas.width, 0.950 * this.canvas.height);
         this.brush.lineTo(0.814 * this.canvas.width, 0.887 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("MemRead", 0.398 * this.canvas.width, 0.337 * this.canvas.height);
+        this.brush.fillText('MemRead', 0.398 * this.canvas.width, 0.337 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.memToReg = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.memToReg);
         this.brush.beginPath();
@@ -4182,11 +4421,16 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.920 * this.canvas.width, 0.37 * this.canvas.height);
         this.brush.lineTo(0.920 * this.canvas.width, 0.59 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("MemToReg", 0.398 * this.canvas.width, 0.365 * this.canvas.height);
+        this.brush.fillText('MemToReg', 0.398 * this.canvas.width, 0.365 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.aluOp = function (str) {
         if (this.audio)
             this.soundController.playSound(ttsConfig.aluOp);
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         this.brush.beginPath();
         this.brush.moveTo(0.385 * this.canvas.width, 0.397 * this.canvas.height);
         this.brush.lineTo(0.497 * this.canvas.width, 0.397 * this.canvas.height);
@@ -4194,10 +4438,15 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.582 * this.canvas.width, 0.954 * this.canvas.height);
         this.brush.lineTo(0.582 * this.canvas.width, 0.908 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("ALUOp", 0.398 * this.canvas.width, 0.393 * this.canvas.height);
+        this.brush.fillText('ALUOp', 0.398 * this.canvas.width, 0.393 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
         this.brush.fillText(str, 0.588 * this.canvas.width, 0.931 * this.canvas.height);
     };
     DrawingClass.prototype.memWrite = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.memWrite);
         this.brush.beginPath();
@@ -4205,9 +4454,14 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.814 * this.canvas.width, 0.425 * this.canvas.height);
         this.brush.lineTo(0.814 * this.canvas.width, 0.600 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("MemWrite", 0.398 * this.canvas.width, 0.42 * this.canvas.height);
+        this.brush.fillText('MemWrite', 0.398 * this.canvas.width, 0.42 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.aluSrc = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.aluSrc);
         this.brush.beginPath();
@@ -4215,9 +4469,14 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.548 * this.canvas.width, 0.452 * this.canvas.height);
         this.brush.lineTo(0.548 * this.canvas.width, 0.601 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("ALUSrc", 0.398 * this.canvas.width, 0.448 * this.canvas.height);
+        this.brush.fillText('ALUSrc', 0.398 * this.canvas.width, 0.448 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.regWrite = function () {
+        var temp = this.brush.strokeStyle;
+        this.brush.strokeStyle = '#006eca';
+        this.brush.fillStyle = '#006eca';
         if (this.audio)
             this.soundController.playSound(ttsConfig.regWrite);
         this.brush.beginPath();
@@ -4225,7 +4484,9 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.414 * this.canvas.width, 0.480 * this.canvas.height);
         this.brush.lineTo(0.414 * this.canvas.width, 0.519 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("RegWrite", 0.398 * this.canvas.width, 0.475 * this.canvas.height);
+        this.brush.fillText('RegWrite', 0.398 * this.canvas.width, 0.475 * this.canvas.height);
+        this.brush.strokeStyle = temp;
+        this.brush.fillStyle = temp;
     };
     DrawingClass.prototype.aluControlToAluBottom = function () {
         this.brush.beginPath();
@@ -4251,7 +4512,7 @@ var DrawingClass = (function () {
         this.brush.moveTo(0.365 * this.canvas.width, 0.052 * this.canvas.height);
         this.brush.lineTo(0.373 * this.canvas.width, 0.073 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("Jump address [31-0]", 0.36 * this.canvas.width, 0.045 * this.canvas.height);
+        this.brush.fillText('Jump address [31-0]', 0.36 * this.canvas.width, 0.045 * this.canvas.height);
     };
     DrawingClass.prototype.addToJumpAddress = function () {
         this.brush.beginPath();
@@ -4261,7 +4522,7 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.400 * this.canvas.width, 0.131 * this.canvas.height);
         this.brush.lineTo(0.400 * this.canvas.width, 0.062 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("PC+4[31-28]", 0.405 * this.canvas.width, 0.134 * this.canvas.height);
+        this.brush.fillText('PC+4[31-28]', 0.405 * this.canvas.width, 0.134 * this.canvas.height);
     };
     DrawingClass.prototype.addToMux = function () {
         this.brush.beginPath();
@@ -4285,9 +4546,9 @@ var DrawingClass = (function () {
         this.brush.lineTo(0.711 * this.canvas.width, 0.149 * this.canvas.height);
         this.brush.lineTo(0.607 * this.canvas.width, 0.103 * this.canvas.height);
         this.brush.stroke();
-        this.brush.fillText("Add", 0.629 * this.canvas.width, 0.206 * this.canvas.height);
-        this.brush.fillText("ALU", 0.674 * this.canvas.width, 0.195 * this.canvas.height);
-        this.brush.fillText("result", 0.666 * this.canvas.width, 0.218 * this.canvas.height);
+        this.brush.fillText('Add', 0.629 * this.canvas.width, 0.206 * this.canvas.height);
+        this.brush.fillText('ALU', 0.674 * this.canvas.width, 0.195 * this.canvas.height);
+        this.brush.fillText('result', 0.666 * this.canvas.width, 0.218 * this.canvas.height);
     };
     DrawingClass.prototype.shiftLeft2ToALUTop = function () {
         this.brush.beginPath();
@@ -4368,26 +4629,22 @@ var DrawingClass = (function () {
         var instruction1511;
         var instruction150;
         var instruction250;
-        if (type == "Itype" || type == "beq") {
+        if (type == 'Itype' || type == 'beq') {
             instruction3126 = instructionAndArguments[0];
             instruction2521 = instructionAndArguments[2];
             instruction2016 = instructionAndArguments[1];
-            instruction1511 = "";
+            instruction1511 = '';
             instruction150 = instructionAndArguments[3];
-            instruction250 = "";
+            instruction250 = '';
         }
-        else if (type == "lw" || type == "sw" || type == "lb" || type == "sb") {
-            console.log("0 ->" + instructionAndArguments[0]);
-            console.log("\n1 ->" + instructionAndArguments[1]);
-            console.log("\n2 ->" + instructionAndArguments[2]);
-            console.log("\n3 ->" + instructionAndArguments[3]);
+        else if (type == 'lw' || type == 'sw' || type == 'lb' || type == 'sb') {
             var secondString = instructionAndArguments[2];
             var endIndex = secondString.indexOf('(');
-            var arrayName = "";
+            var arrayName = '';
             for (var i = 0; i < endIndex; i++) {
                 arrayName += secondString.charAt(i);
             }
-            var registerForIndex = "";
+            var registerForIndex = '';
             for (var i = endIndex + 1; i < secondString.length - 1; i++) {
                 registerForIndex += secondString.charAt(i);
             }
@@ -4395,24 +4652,24 @@ var DrawingClass = (function () {
             instruction3126 = instructionAndArguments[0];
             instruction2521 = registerInsedeBrackets;
             instruction2016 = instructionAndArguments[1];
-            instruction1511 = "";
+            instruction1511 = '';
             instruction150 = arrayName;
-            instruction250 = "";
+            instruction250 = '';
         }
-        else if (type == "Rtype") {
+        else if (type == 'Rtype') {
             instruction3126 = instructionAndArguments[0];
             instruction2521 = instructionAndArguments[2];
             instruction2016 = instructionAndArguments[3];
             instruction1511 = instructionAndArguments[1];
-            instruction150 = "";
-            instruction250 = "";
+            instruction150 = '';
+            instruction250 = '';
         }
-        else if (type == "j") {
+        else if (type == 'j') {
             instruction3126 = instructionAndArguments[0];
-            instruction2521 = "";
-            instruction2016 = "";
-            instruction1511 = "";
-            instruction150 = "";
+            instruction2521 = '';
+            instruction2016 = '';
+            instruction1511 = '';
+            instruction150 = '';
             instruction250 = instructionAndArguments[1];
         }
         func(stringALU, instruction3126, instruction2521, instruction2016, instruction1511, instruction150, instruction250);
@@ -4449,12 +4706,12 @@ var DrawingClass = (function () {
         this.topRightMUX();
         this.readAddress();
         this.fromReadAddress();
-        this.instruction2016("", "", "", "", "", "", "");
-        this.instruction2521("", "", "", "", "", "", "");
-        this.instruction3126("", "", "", "", "", "", "");
-        this.instruction1511("", "", "", "", "", "", "");
-        this.instruction150("", "", "", "", "", "", "");
-        this.instruction250("", "", "", "", "", "", "");
+        this.instruction2016('', '', '', '', '', '', '');
+        this.instruction2521('', '', '', '', '', '', '');
+        this.instruction3126('', '', '', '', '', '', '');
+        this.instruction1511('', '', '', '', '', '', '');
+        this.instruction150('', '', '', '', '', '', '');
+        this.instruction250('', '', '', '', '', '', '');
         this.drawControl();
         this.drawMUX1511();
         this.draw2016toMUX();
@@ -4488,7 +4745,7 @@ var DrawingClass = (function () {
         this.halfCircleMUX();
         this.memRead();
         this.memToReg();
-        this.aluOp("");
+        this.aluOp('');
         this.memWrite();
         this.aluSrc();
         this.regWrite();
@@ -4957,25 +5214,30 @@ exports.__esModule = true;
 var Memory_1 = __webpack_require__(19);
 var MIPS = (function () {
     function MIPS(typeObjectArray) {
-        this.validRegisters = ["$zero", "$at", "$v0", "$v1", "$a0",
-            "$a1", "$a2", "$a3", "$t0", "$t1", "$t2",
-            "$t3", "$t4", "$t5", "$t6", "$t7",
-            "$s0", "$s1", "$s2", "$s3", "$s4",
-            "$s5", "$s6", "$s7", "$t8", "$t9",
-            "$k0", "$k1", "$gp", "$sp", "$fp",
-            "$ra"];
-        this.defaultRegistersColor = "white";
-        this.highlightColor = "cyan";
+        this.validRegisters = [
+            '$zero', '$at', '$v0', '$v1', '$a0', '$a1', '$a2', '$a3',
+            '$t0', '$t1', '$t2', '$t3', '$t4', '$t5', '$t6', '$t7',
+            '$s0', '$s1', '$s2', '$s3', '$s4', '$s5', '$s6', '$s7',
+            '$t8', '$t9', '$k0', '$k1', '$gp', '$sp', '$fp', '$ra'
+        ];
+        this.instructionsOPCODE = 'addi, 8, addiu, 9, andi, c, slti, a, sltiu, b, ori, d, lw, 23, lb, 24, sw, 2b, sb, 28, beq, 4, j, 2'
+            .split(', ');
+        this.instructionsFUNCT = 'add, 32, addu, 33, sub, 34, subu, 35, and, 36, or, 37, slt, 42, sltu, 43, '
+            .split(', ');
+        this.defaultRegistersColor = 'white';
+        this.highlightColor = 'cyan';
         this.typeObjectArray = typeObjectArray;
         this.memory = new Memory_1.Memory();
         this.registers = new Array();
         for (var i = 0; i < 32; i++) {
             this.registers[i] = 0;
         }
-        this.registerToHighlight = "";
+        this.registerToHighlight = '';
         this.updateRegisters();
-        console.log("MIPS class constructed. With registers and everything..");
+        console.log('MIPS class constructed. With registers and everything..');
     }
+    ;
+    ;
     MIPS.prototype.setDefaultRegistersColor = function (defaultRegistersColor) {
         this.defaultRegistersColor = defaultRegistersColor;
     };
@@ -4987,10 +5249,11 @@ var MIPS = (function () {
             this.registers[i] = 0;
         }
         this.memory = new Memory_1.Memory();
-        this.registerToHighlight = "";
+        this.registerToHighlight = '';
         this.updateRegisters();
-        document.getElementById("instructionAndArguments").value = "";
-        console.log("!!!MIPS reset!!!");
+        document.getElementById('instructionAndArguments')
+            .value = '';
+        console.log('!!!MIPS reset!!!');
     };
     MIPS.prototype.loadMemory = function (dataList) {
         if (dataList == undefined)
@@ -5010,7 +5273,7 @@ var MIPS = (function () {
     };
     MIPS.prototype.run = function (instructionAndArguments) {
         var instruction = instructionAndArguments[0];
-        var instructionType = "";
+        var instructionType = '';
         for (var i = 0; i < this.typeObjectArray.length; i++) {
             if (this.typeObjectArray[i].isThisType(instruction)) {
                 instructionType = this.typeObjectArray[i].type;
@@ -5018,39 +5281,275 @@ var MIPS = (function () {
             }
         }
         switch (instructionType) {
-            case "Rtype": {
+            case 'Rtype': {
                 this.runRtype(instructionAndArguments);
                 this.updateRegisters();
                 break;
             }
-            case "Itype": {
+            case 'Itype': {
                 this.runIType(instructionAndArguments);
                 this.updateRegisters();
                 break;
             }
-            case "sw": {
+            case 'sw': {
                 this.runSW(instructionAndArguments);
                 this.updateRegisters();
                 break;
             }
-            case "lw": {
+            case 'lw': {
                 this.runLW(instructionAndArguments);
                 this.updateRegisters();
                 break;
             }
         }
+        var binary = this.getInstructionInBinary(instructionType, instructionAndArguments);
         console.clear();
-        console.log("\nMEMORY \n" + this.memory.bytesArray.toString());
-        document.getElementById("instructionAndArguments").value = instructionAndArguments[0].replace(/,/g, " ") + " " + instructionAndArguments.slice(1).toString();
+        console.log('\nMEMORY \n' + this.memory.bytesArray.toString());
+        document.getElementById('instructionAndArguments')
+            .value = instructionAndArguments[0].replace(/,/g, ' ') + ' ' +
+            instructionAndArguments.slice(1).toString();
+        document.getElementById('instructionAndArguments')
+            .value += binary;
+    };
+    MIPS.prototype.getInstructionInBinary = function (instructionType, instructionAndArguments) {
+        var output = '';
+        switch (instructionType) {
+            case 'Rtype': {
+                output = '0';
+                output = this.alignTo(output, 6) + ' ';
+                var first = Number(this.validRegisters.indexOf(instructionAndArguments[1]))
+                    .toString(2) +
+                    '';
+                var second = Number(this.validRegisters.indexOf(instructionAndArguments[2]))
+                    .toString(2) +
+                    '';
+                var third = Number(this.validRegisters.indexOf(instructionAndArguments[3]))
+                    .toString(2) +
+                    '';
+                first = this.alignTo(first, 5) + ' ';
+                second = this.alignTo(second, 5) + ' ';
+                third = this.alignTo(third, 5) + ' ';
+                output = output + third + first + second;
+                var funct = this.instructionsFUNCT[this.instructionsFUNCT.indexOf(instructionAndArguments[0]) +
+                    1] +
+                    '';
+                funct = Number(funct).toString(2);
+                funct = this.alignTo(funct, 6);
+                output += funct;
+                break;
+            }
+            case 'Itype': {
+                output =
+                    this.instructionsOPCODE[this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
+                        1] +
+                        '';
+                output = parseInt(output, 16).toString(2) + '';
+                output = this.alignTo(output, 6) + ' ';
+                var first = this.validRegisters.indexOf(instructionAndArguments[1])
+                    .toString(2) +
+                    '';
+                var second = this.validRegisters.indexOf(instructionAndArguments[2])
+                    .toString(2) +
+                    '';
+                var third = Number(instructionAndArguments[3]).toString(2) + '';
+                first = this.alignTo(first, 5) + ' ';
+                second = this.alignTo(second, 5) + ' ';
+                third = this.alignTo(third, 16) + ' ';
+                output = output + second + first + third;
+                break;
+            }
+            case 'sw': {
+                var tempArray = this.getInstructionsList(true);
+                var secondString = instructionAndArguments[2];
+                var endIndex = secondString.indexOf('(');
+                var arrayName = '';
+                for (var i = 0; i < endIndex; i++) {
+                    arrayName += secondString.charAt(i);
+                }
+                var registerForIndex = '';
+                for (var i = endIndex + 1; i < secondString.length - 1; i++) {
+                    registerForIndex += secondString.charAt(i);
+                }
+                var array = arrayName;
+                var arrayIndex = this.memory.dictionary.getValue(array);
+                output =
+                    this.instructionsOPCODE[this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
+                        1] +
+                        '';
+                output = parseInt(output, 16).toString(2) + '';
+                output = this.alignTo(output, 6) + ' ';
+                var first = this.validRegisters.indexOf(instructionAndArguments[1])
+                    .toString(2) +
+                    '';
+                var second = this.validRegisters.indexOf(registerForIndex).toString(2) + '';
+                var third = (arrayIndex * 4).toString(2);
+                first = this.alignTo(first, 5) + ' ';
+                second = this.alignTo(second, 5) + ' ';
+                third = this.alignTo(third, 16) + ' ';
+                output = output + second + first + third;
+                break;
+            }
+            case 'lw': {
+                var tempArray = this.getInstructionsList(true);
+                var secondString = instructionAndArguments[2];
+                var endIndex = secondString.indexOf('(');
+                var arrayName = '';
+                for (var i = 0; i < endIndex; i++) {
+                    arrayName += secondString.charAt(i);
+                }
+                var registerForIndex = '';
+                for (var i = endIndex + 1; i < secondString.length - 1; i++) {
+                    registerForIndex += secondString.charAt(i);
+                }
+                var array = arrayName;
+                var arrayIndex = this.memory.dictionary.getValue(array);
+                output =
+                    this.instructionsOPCODE[this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
+                        1] +
+                        '';
+                output = parseInt(output, 16).toString(2);
+                output = this.alignTo(output, 6) + ' ';
+                var first = this.validRegisters.indexOf(instructionAndArguments[1])
+                    .toString(2) +
+                    '';
+                var second = this.validRegisters.indexOf(registerForIndex).toString(2) + '';
+                var third = (arrayIndex * 4).toString(2);
+                first = this.alignTo(first, 5) + ' ';
+                second = this.alignTo(second, 5) + ' ';
+                third = this.alignTo(third, 16) + ' ';
+                output = output + second + first + third;
+                break;
+            }
+            case 'j': {
+                var tempArray = this.getInstructionsList(true);
+                var label = instructionAndArguments[1];
+                var labelIndex = tempArray.indexOf(label + ':');
+                var first = this.instructionsOPCODE[this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
+                    1] +
+                    '';
+                var second = Number(labelIndex * 4).toString(2);
+                first = this.alignTo(first, 6) + ' ';
+                second = this.alignTo(second, 26);
+                output = first + second;
+                break;
+            }
+            case 'beq': {
+                var tempArray2 = this.getInstructionsList(true);
+                var label = instructionAndArguments[3];
+                var branchIndex = tempArray2.indexOf(label + ':');
+                output =
+                    this.instructionsOPCODE[this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
+                        1] +
+                        '';
+                output = parseInt(output, 16).toString(2) + '';
+                output = this.alignTo(output, 6) + ' ';
+                var first = this.validRegisters.indexOf(instructionAndArguments[1])
+                    .toString(2) +
+                    '';
+                var second = this.validRegisters.indexOf(instructionAndArguments[2])
+                    .toString(2) +
+                    '';
+                var third = (branchIndex * 4).toString(2);
+                first = this.alignTo(first, 5) + ' ';
+                second = this.alignTo(second, 5) + ' ';
+                third = this.alignTo(third, 16) + ' ';
+                output = output + second + first + third;
+                break;
+            }
+        }
+        return '\n' + output;
+    };
+    MIPS.prototype.getDataList = function () {
+        var tempArray = document.getElementById('textInput')
+            .value.match(/[^\r\n]+/g);
+        if (this.getDotDataLineIndex(tempArray) == -1)
+            return undefined;
+        var startingIndex = this.getDotDataLineIndex(tempArray) + 1;
+        var endingIndex = this.getDotTextLineIndex(tempArray);
+        if (endingIndex < startingIndex)
+            endingIndex = tempArray.length;
+        if (endingIndex == startingIndex) {
+            return undefined;
+        }
+        var arrayToReturn = new Array();
+        var count = 0;
+        for (var i = startingIndex; i < endingIndex; i++) {
+            arrayToReturn[count] = tempArray[i].split(/\s+/g);
+            count++;
+        }
+        for (var i = 0; i < arrayToReturn.length; i++) {
+            for (var j = 0; j < arrayToReturn[i].length; j++) {
+                if (i == 0 && j == 0)
+                    continue;
+                arrayToReturn[i][j] = arrayToReturn[i][j].replace(/,/g, '');
+            }
+        }
+        return arrayToReturn;
+    };
+    MIPS.prototype.getInstructionsList = function (withLabels) {
+        var tempArray = document.getElementById('textInput')
+            .value.match(/[^\r\n]+/g);
+        var startingIndex = this.getDotTextLineIndex(tempArray) + 1;
+        var endingIndex = 0;
+        if (this.getDotDataLineIndex(tempArray) < startingIndex)
+            endingIndex = tempArray.length;
+        else
+            endingIndex = this.getDotDataLineIndex(tempArray);
+        var arrayToReturn = new Array();
+        var counter = 0;
+        for (var i = startingIndex; i < endingIndex; i++) {
+            if (!withLabels) {
+                if ((tempArray[i].split(/\s+/g))[0].charAt(tempArray[i].split(/\s+/g)[0].length - 1) == ':')
+                    continue;
+            }
+            arrayToReturn[counter] = tempArray[i].split(/\s+/g)[0];
+            counter++;
+        }
+        return arrayToReturn;
+    };
+    MIPS.prototype.getDotDataLineIndex = function (array) {
+        var index = -1;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].split(/\s+/g)[0] == '.data') {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    };
+    MIPS.prototype.getDotTextLineIndex = function (array) {
+        var index = -1;
+        for (var i = 0; i < array.length; i++) {
+            if (array[i].split(/\s+/g)[0] == '.text') {
+                index = i;
+            }
+        }
+        return index;
+    };
+    MIPS.prototype.alignTo = function (num, to) {
+        if (num == undefined) {
+            console.log(to);
+        }
+        if (num.length != to) {
+            var temp = '';
+            for (var i = 0; i < to - num.length; i++) {
+                temp += '0';
+            }
+            return temp + num;
+        }
+        else
+            return num;
     };
     MIPS.prototype.getRegsiterIndex = function (register) {
         return this.validRegisters.indexOf(register);
     };
     MIPS.prototype.runBeq = function (beqAndArguments) {
-        return (this.registers[this.getRegsiterIndex(beqAndArguments[1])]) == (this.registers[this.getRegsiterIndex(beqAndArguments[2])]);
+        return (this.registers[this.getRegsiterIndex(beqAndArguments[1])]) ==
+            (this.registers[this.getRegsiterIndex(beqAndArguments[2])]);
     };
     MIPS.prototype.runBne = function (beqAndArguments) {
-        return (this.registers[this.getRegsiterIndex(beqAndArguments[1])]) != (this.registers[this.getRegsiterIndex(beqAndArguments[2])]);
+        return (this.registers[this.getRegsiterIndex(beqAndArguments[1])]) !=
+            (this.registers[this.getRegsiterIndex(beqAndArguments[2])]);
     };
     MIPS.prototype.runRtype = function (instructionAndArguments) {
         var instruction = instructionAndArguments[0];
@@ -5060,28 +5559,32 @@ var MIPS = (function () {
         switch (instruction) {
             case 'add':
             case 'addu': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 + arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 + arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing add");
+                console.log('doing add');
                 break;
             }
             case 'sub':
             case 'subu': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 - arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 - arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing sub");
+                console.log('doing sub');
                 break;
             }
             case 'and': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 & arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 & arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing and");
+                console.log('doing and');
                 break;
             }
             case 'or': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 | arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 | arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing or");
+                console.log('doing or');
                 break;
             }
             case 'slt':
@@ -5091,7 +5594,7 @@ var MIPS = (function () {
                 else
                     this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = 0;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing slt");
+                console.log('doing slt');
                 break;
             }
         }
@@ -5106,17 +5609,17 @@ var MIPS = (function () {
                 var valueByte = this.registers[this.getRegsiterIndex(register)];
                 var secondString = argumentsOfInstruction[1];
                 var endIndex = secondString.indexOf('(');
-                var arrayName = "";
+                var arrayName = '';
                 for (var i = 0; i < endIndex; i++) {
                     arrayName += secondString.charAt(i);
                 }
-                var registerForIndex = "";
+                var registerForIndex = '';
                 for (var i = endIndex + 1; i < secondString.length - 1; i++) {
                     registerForIndex += secondString.charAt(i);
                 }
                 var index = this.registers[this.getRegsiterIndex(registerForIndex)];
                 this.memory.storeByte(arrayName, index, valueByte);
-                this.registerToHighlight = "";
+                this.registerToHighlight = '';
                 break;
             }
             case 'sw': {
@@ -5124,17 +5627,17 @@ var MIPS = (function () {
                 var valueByte = this.registers[this.getRegsiterIndex(register)];
                 var secondString = argumentsOfInstruction[1];
                 var endIndex = secondString.indexOf('(');
-                var arrayName = "";
+                var arrayName = '';
                 for (var i = 0; i < endIndex; i++) {
                     arrayName += secondString.charAt(i);
                 }
-                var registerForIndex = "";
+                var registerForIndex = '';
                 for (var i = endIndex + 1; i < secondString.length - 1; i++) {
                     registerForIndex += secondString.charAt(i);
                 }
                 var index = this.registers[this.getRegsiterIndex(registerForIndex)];
                 this.memory.storeWord(arrayName, index, valueByte);
-                this.registerToHighlight = "";
+                this.registerToHighlight = '';
             }
         }
         this.updateRegisters();
@@ -5147,11 +5650,11 @@ var MIPS = (function () {
                 var register = argumentsOfInstruction[0];
                 var secondString = argumentsOfInstruction[1];
                 var endIndex = secondString.indexOf('(');
-                var arrayName = "";
+                var arrayName = '';
                 for (var i = 0; i < endIndex; i++) {
                     arrayName += secondString.charAt(i);
                 }
-                var registerForIndex = "";
+                var registerForIndex = '';
                 for (var i = endIndex + 1; i < secondString.length - 1; i++) {
                     registerForIndex += secondString.charAt(i);
                 }
@@ -5166,16 +5669,17 @@ var MIPS = (function () {
                 var register = argumentsOfInstruction[0];
                 var secondString = argumentsOfInstruction[1];
                 var endIndex = secondString.indexOf('(');
-                var arrayName = "";
+                var arrayName = '';
                 for (var i = 0; i < endIndex; i++) {
                     arrayName += secondString.charAt(i);
                 }
-                var registerForIndex = "";
+                var registerForIndex = '';
                 for (var i = endIndex + 1; i < secondString.length - 1; i++) {
                     registerForIndex += secondString.charAt(i);
                 }
                 var index = this.registers[this.getRegsiterIndex(registerForIndex)];
-                this.registers[this.getRegsiterIndex(register)] = parseInt(this.memory.loadWord(arrayName, index), 16);
+                this.registers[this.getRegsiterIndex(register)] =
+                    parseInt(this.memory.loadWord(arrayName, index), 16);
                 this.registerToHighlight = register;
                 break;
             }
@@ -5194,21 +5698,24 @@ var MIPS = (function () {
         switch (instruction) {
             case 'addi':
             case 'addiu': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 + arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 + arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing addi");
+                console.log('doing addi');
                 break;
             }
             case 'andi': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 & arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 & arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing andi");
+                console.log('doing andi');
                 break;
             }
             case 'ori': {
-                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = arg2 | arg3;
+                this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] =
+                    arg2 | arg3;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing ori");
+                console.log('doing ori');
                 break;
             }
             case 'slti':
@@ -5218,14 +5725,13 @@ var MIPS = (function () {
                 else
                     this.registers[this.getRegsiterIndex(argumentsOfInstruction[0])] = 0;
                 this.registerToHighlight = argumentsOfInstruction[0];
-                console.log("doing slti");
+                console.log('doing slti');
                 break;
             }
             case 'beq':
             case 'bne':
             case 'j': {
-                console.log("doing beq/j. already done so not really doing anything.");
-                this.registerToHighlight = "";
+                this.registerToHighlight = '';
                 break;
             }
         }
@@ -5235,55 +5741,93 @@ var MIPS = (function () {
         for (var i = 0; i < this.registers.length; i++) {
             document.getElementById(this.validRegisters[i]).style.color = 'white';
             if (this.registers[i] != 0) {
-                document.getElementById(this.validRegisters[i]).style.color = this.highlightColor;
-                document.getElementById(this.validRegisters[i] + "label").style.color = this.highlightColor;
+                document.getElementById(this.validRegisters[i]).style.color =
+                    this.highlightColor;
+                document.getElementById(this.validRegisters[i] + 'label').style.color =
+                    this.highlightColor;
             }
         }
     };
     MIPS.prototype.highLightRegister = function () {
         for (var i = 0; i < this.registers.length; i++) {
-            document.getElementById(this.validRegisters[i]).style.color = this.defaultRegistersColor;
-            document.getElementById(this.validRegisters[i] + "label").style.color = this.defaultRegistersColor;
+            document.getElementById(this.validRegisters[i]).style.color =
+                this.defaultRegistersColor;
+            document.getElementById(this.validRegisters[i] + 'label').style.color =
+                this.defaultRegistersColor;
         }
-        if (this.registerToHighlight == "")
+        if (this.registerToHighlight == '')
             return;
-        document.getElementById(this.registerToHighlight).style.color = this.highlightColor;
-        document.getElementById(this.registerToHighlight + "label").style.color = this.highlightColor;
+        document.getElementById(this.registerToHighlight).style.color =
+            this.highlightColor;
+        document.getElementById(this.registerToHighlight + 'label').style.color =
+            this.highlightColor;
     };
     MIPS.prototype.updateRegisters = function () {
         this.highLightRegister();
-        document.getElementById("$zero").innerHTML = "" + this.registers[this.getRegsiterIndex("$zero")];
-        document.getElementById("$at").innerHTML = "" + this.registers[this.getRegsiterIndex("$at")];
-        document.getElementById("$v0").innerHTML = "" + this.registers[this.getRegsiterIndex("$v0")];
-        document.getElementById("$v1").innerHTML = "" + this.registers[this.getRegsiterIndex("$v1")];
-        document.getElementById("$a0").innerHTML = "" + this.registers[this.getRegsiterIndex("$a0")];
-        document.getElementById("$a1").innerHTML = "" + this.registers[this.getRegsiterIndex("$a1")];
-        document.getElementById("$a2").innerHTML = "" + this.registers[this.getRegsiterIndex("$a2")];
-        document.getElementById("$a3").innerHTML = "" + this.registers[this.getRegsiterIndex("$a3")];
-        document.getElementById("$t0").innerHTML = "" + this.registers[this.getRegsiterIndex("$t0")];
-        document.getElementById("$t1").innerHTML = "" + this.registers[this.getRegsiterIndex("$t1")];
-        document.getElementById("$t2").innerHTML = "" + this.registers[this.getRegsiterIndex("$t2")];
-        document.getElementById("$t3").innerHTML = "" + this.registers[this.getRegsiterIndex("$t3")];
-        document.getElementById("$t4").innerHTML = "" + this.registers[this.getRegsiterIndex("$t4")];
-        document.getElementById("$t5").innerHTML = "" + this.registers[this.getRegsiterIndex("$t5")];
-        document.getElementById("$t6").innerHTML = "" + this.registers[this.getRegsiterIndex("$t6")];
-        document.getElementById("$t7").innerHTML = "" + this.registers[this.getRegsiterIndex("$t7")];
-        document.getElementById("$s0").innerHTML = "" + this.registers[this.getRegsiterIndex("$s0")];
-        document.getElementById("$s1").innerHTML = "" + this.registers[this.getRegsiterIndex("$s1")];
-        document.getElementById("$s2").innerHTML = "" + this.registers[this.getRegsiterIndex("$s2")];
-        document.getElementById("$s3").innerHTML = "" + this.registers[this.getRegsiterIndex("$s3")];
-        document.getElementById("$s4").innerHTML = "" + this.registers[this.getRegsiterIndex("$s4")];
-        document.getElementById("$s5").innerHTML = "" + this.registers[this.getRegsiterIndex("$s5")];
-        document.getElementById("$s6").innerHTML = "" + this.registers[this.getRegsiterIndex("$s6")];
-        document.getElementById("$s7").innerHTML = "" + this.registers[this.getRegsiterIndex("$s7")];
-        document.getElementById("$t8").innerHTML = "" + this.registers[this.getRegsiterIndex("$t8")];
-        document.getElementById("$t9").innerHTML = "" + this.registers[this.getRegsiterIndex("$t9")];
-        document.getElementById("$k0").innerHTML = "" + this.registers[this.getRegsiterIndex("$k0")];
-        document.getElementById("$k1").innerHTML = "" + this.registers[this.getRegsiterIndex("$k1")];
-        document.getElementById("$gp").innerHTML = "" + this.registers[this.getRegsiterIndex("$gp")];
-        document.getElementById("$sp").innerHTML = "" + this.registers[this.getRegsiterIndex("$sp")];
-        document.getElementById("$fp").innerHTML = "" + this.registers[this.getRegsiterIndex("$fp")];
-        document.getElementById("$ra").innerHTML = "" + this.registers[this.getRegsiterIndex("$ra")];
+        document.getElementById('$zero').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$zero')];
+        document.getElementById('$at').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$at')];
+        document.getElementById('$v0').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$v0')];
+        document.getElementById('$v1').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$v1')];
+        document.getElementById('$a0').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$a0')];
+        document.getElementById('$a1').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$a1')];
+        document.getElementById('$a2').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$a2')];
+        document.getElementById('$a3').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$a3')];
+        document.getElementById('$t0').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t0')];
+        document.getElementById('$t1').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t1')];
+        document.getElementById('$t2').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t2')];
+        document.getElementById('$t3').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t3')];
+        document.getElementById('$t4').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t4')];
+        document.getElementById('$t5').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t5')];
+        document.getElementById('$t6').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t6')];
+        document.getElementById('$t7').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t7')];
+        document.getElementById('$s0').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s0')];
+        document.getElementById('$s1').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s1')];
+        document.getElementById('$s2').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s2')];
+        document.getElementById('$s3').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s3')];
+        document.getElementById('$s4').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s4')];
+        document.getElementById('$s5').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s5')];
+        document.getElementById('$s6').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s6')];
+        document.getElementById('$s7').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$s7')];
+        document.getElementById('$t8').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t8')];
+        document.getElementById('$t9').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$t9')];
+        document.getElementById('$k0').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$k0')];
+        document.getElementById('$k1').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$k1')];
+        document.getElementById('$gp').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$gp')];
+        document.getElementById('$sp').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$sp')];
+        document.getElementById('$fp').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$fp')];
+        document.getElementById('$ra').innerHTML =
+            '' + this.registers[this.getRegsiterIndex('$ra')];
     };
     return MIPS;
 }());
@@ -5419,19 +5963,20 @@ var Memory = (function () {
     Memory.prototype.addToMemory = function (arrayName, type, values) {
         var newArray = new Array();
         switch (type) {
-            case ".word": {
+            case '.word': {
                 this.goToNextWordIndex();
                 this.dictionary.setValue(arrayName, this.currentIndex);
                 for (var i = 0; i < values.length; i++) {
                     this.goToNextWordIndex();
                     var hexString = values[i].toString(16);
-                    var padding = "";
+                    var padding = '';
                     for (var j = 0; j < 8 - hexString.length; j++) {
-                        padding += "0";
+                        padding += '0';
                     }
                     hexString = padding + hexString;
                     for (var k = 7; k > 0; k = k - 2) {
-                        this.bytesArray[this.currentIndex--] = hexString.charAt(k - 1) + hexString.charAt(k);
+                        this.bytesArray[this.currentIndex--] =
+                            hexString.charAt(k - 1) + hexString.charAt(k);
                     }
                     this.currentIndex++;
                     this.goToNextWordIndex();
@@ -5439,14 +5984,14 @@ var Memory = (function () {
                 this.currentIndex = this.bytesArray.length - 1;
                 break;
             }
-            case ".byte": {
+            case '.byte': {
                 this.goToNextByteIndex();
                 this.dictionary.setValue(arrayName, this.currentIndex);
                 for (var i = 0; i < values.length; i++) {
                     this.goToNextByteIndex();
                     var hexString = values[i].toString(16);
                     if (hexString.length == 1)
-                        hexString = "0" + hexString;
+                        hexString = '0' + hexString;
                     this.bytesArray[this.currentIndex] = hexString;
                 }
                 break;
@@ -5459,13 +6004,14 @@ var Memory = (function () {
         else {
             var offset = this.dictionary.getValue(arrayName) + index;
             var stringValue = byteValue.toString(16);
-            var padding = "";
+            var padding = '';
             for (var j = 0; j < 8 - stringValue.length; j++) {
-                padding += "0";
+                padding += '0';
             }
             stringValue = padding + stringValue;
             for (var k = 0; k < 4; k++) {
-                this.bytesArray[offset - (3 - k)] = stringValue[(k * 2)] + stringValue[(k * 2) + 1];
+                this.bytesArray[offset - (3 - k)] =
+                    stringValue[(k * 2)] + stringValue[(k * 2) + 1];
             }
         }
     };
@@ -5474,13 +6020,16 @@ var Memory = (function () {
             return undefined;
         else {
             var offset = this.dictionary.getValue(arrayName) + index;
-            var thingToReturn = "";
-            thingToReturn += this.bytesArray[offset - 3] + this.bytesArray[offset - 2] + this.bytesArray[offset - 1] + this.bytesArray[offset];
+            var thingToReturn = '';
+            thingToReturn += this.bytesArray[offset - 3] +
+                this.bytesArray[offset - 2] + this.bytesArray[offset - 1] +
+                this.bytesArray[offset];
             return thingToReturn;
         }
     };
     Memory.prototype.storeByte = function (arrayName, index, byteValue) {
-        console.log("arrayName is " + arrayName + " index given as " + index + " byteValue in hex is " + byteValue.toString(16));
+        console.log('arrayName is ' + arrayName + ' index given as ' + index +
+            ' byteValue in hex is ' + byteValue.toString(16));
         var offset = this.dictionary.getValue(arrayName);
         index++;
         if (index > 4) {
@@ -5491,9 +6040,10 @@ var Memory = (function () {
         }
         else
             offset -= (index - 1);
-        console.log("offset after while loop is " + offset + " currently its " + this.bytesArray[offset]);
+        console.log('offset after while loop is ' + offset + ' currently its ' +
+            this.bytesArray[offset]);
         this.bytesArray[offset] = byteValue.toString(16);
-        console.log("this is bytes array after adding f " + this.bytesArray.toString());
+        console.log('this is bytes array after adding f ' + this.bytesArray.toString());
     };
     Memory.prototype.loadByte = function (arrayName, index) {
         var offset = this.dictionary.getValue(arrayName);
@@ -5506,12 +6056,12 @@ var Memory = (function () {
         }
         else
             offset -= (index - 1);
-        alert("offset in loadByte after while loop is " + offset);
-        alert("loadByte returning this " + this.bytesArray[offset]);
+        alert('offset in loadByte after while loop is ' + offset);
+        alert('loadByte returning this ' + this.bytesArray[offset]);
         return this.bytesArray[offset];
     };
     Memory.prototype.goToNextByteIndex = function () {
-        if (this.bytesArray[this.currentIndex] == "0")
+        if (this.bytesArray[this.currentIndex] == '0')
             return;
         else {
             if (this.currentIndex % 4 == 0) {
@@ -5539,7 +6089,7 @@ var Memory = (function () {
         var start = this.bytesArray.length;
         var end = start + 4;
         for (var i = start; i < end; i++) {
-            this.bytesArray[i] = "0";
+            this.bytesArray[i] = '0';
         }
     };
     return Memory;

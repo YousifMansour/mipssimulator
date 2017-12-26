@@ -2,6 +2,16 @@
 <html>
 
 <head>
+
+	<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');  
+			ga('create', 'UA-104541037-1', 'auto');
+			ga('send', 'pageview');  
+	</script>
+
 	<title>MIPS Simulator </title>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="script/node_modules/splash-screen/dist/splash.min.css">
@@ -9,8 +19,8 @@
  
 
 	<script tex="text/javascript" src="script/ttsConfig.js"></script>
-	<script src="script//jscolor.js"></script>
-	<script src="script//responsivevoice.js"></script>
+	<script src="script/jscolor.js"></script>
+	<script src="script/responsivevoice.js"></script>
 
 	<script type="text/javascript" src="script/bundle.js"></script>
 
@@ -91,7 +101,7 @@ array: .word 2, 3
 
 		</table>
 
-		<textarea id="instructionAndArguments" style="overflow:hidden" spellcheck="false" autocomplete="false" rows="2" cols="30" disabled>
+		<textarea id="instructionAndArguments" style="overflow:hidden" spellcheck="false" autocomplete="false" rows="4" cols="40" disabled>
 	</textarea>
 
 		<!--<textarea class="nofullscreen" id="instructionIndicator" disabled rows="2"></textarea>-->
@@ -431,132 +441,11 @@ array: .word 2, 3
 
 		</div>
 
-		<!--<table id="firsttable">
-
-		<tr>
-			<th>Instuction</th>
-			<th>Type</th>
-
-		</tr>
-		<tr>
-			<td>add</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>addu</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>sub</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>subu</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>and</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>or</td>
-			<td>R-Type</td>
-
-		</tr>
-
-		<tr>
-			<td>slt</td>
-			<td>R-Type</td>
-
-		</tr>
-
-	</table>
-
-	<table id="secondtable">
-
-		<tr>
-			<th>Instuction</th>
-			<th>Type</th>
-
-			<tr>
-				<td>sltu</td>
-				<td>R-Type</td>
-
-			</tr>
-
-			<tr>
-				<td>addi</td>
-				<td>I-Type</td>
-			</tr>
-			<tr>
-				<td>addiu</td>
-				<td>I-Type</td>
-			</tr>
-			<tr>
-				<td>andi</td>
-				<td>I-Type</td>
-			</tr>
-			<tr>
-				<td>slti</td>
-				<td>I-Type</td>
-			</tr>
-			<tr>
-				<td>sltiu</td>
-				<td>I-Type</td>
-			</tr>
-			<tr>
-				<td>ori</td>
-				<td>I-Type</td>
-			</tr>
-
-	</table>
-
-	<table id="thirdtable">
-
-		<tr>
-			<th>Instuction</th>
-			<th>Type</th>
-
-			<tr>
-				<td>lw</td>
-				<td>lw</td>
-			</tr>
-			<tr>
-				<td>lb</td>
-				<td>lw</td>
-			</tr>
-
-			<tr>
-				<td>sw</td>
-				<td>sw</td>
-			</tr>
-			<tr>
-				<td>sb</td>
-				<td>sw</td>
-			</tr>
-
-			<tr>
-				<td>beq</td>
-				<td>beq</td>
-			</tr>
-			<tr>
-				<td>j</td>
-				<td>j</td>
-			</tr>
-
-	</table>-->
-
 		<img id="fasLogo" src="res/faslogo_trans.png"></img>
+
+		<a href="https://github.com/YousifMansour/mipssimulator" target="_blank">
+			<img id="github" src="res/github_black.png">
+		</a>
 
 		<footer id="footer"> &copy;
 			<script language="JavaScript" type="text/javascript">

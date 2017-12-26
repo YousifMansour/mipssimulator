@@ -253,9 +253,9 @@ export class MainController {
 
         }
 
-        console.log("frameIndex = " + this.frameIndex);
-        console.log(" iteration index = " + this.iterationIndex + " listInOrder length = " + (this.listInOrder.length - 1));
-        console.log(" max frame = " + (this.getTypeObjecet(this.listInOrder[this.iterationIndex][0]).functionsArray.length - 1));
+        // console.log("frameIndex = " + this.frameIndex);
+        // console.log(" iteration index = " + this.iterationIndex + " listInOrder length = " + (this.listInOrder.length - 1));
+        // console.log(" max frame = " + (this.getTypeObjecet(this.listInOrder[this.iterationIndex][0]).functionsArray.length - 1));
 
         return this.getTypeObjecet(this.listInOrder[this.iterationIndex][0]).functionsArray[this.frameIndex++];
     }

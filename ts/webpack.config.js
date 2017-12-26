@@ -2,6 +2,6 @@ module.exports = {
     entry: "../js/Main.js",
     output: {
         filename: 'bundle.js',
-        path: "/home/yousif/Dropbox/project_mips/project_mips_final/LATEST/script"
+        path: "/home/yousif/mips/mipssimulator/script"
     }
 } 

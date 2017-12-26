@@ -50,17 +50,23 @@ body.fade-out {
     left: 0%;
 }
 
+#github {
+    margin-left: 1%;
+    margin-right: 1%;
+    position: absolute;
+    bottom: 0%;
+    width: 5%;
+    right: 25.5%;
+}
+
+
 #fasLogo {
     margin-left: 1%;
     margin-right: 1%;
     position: absolute;
     bottom: 0%;
     width: 10%;
-    /*background-image: url("../res/fasLogo.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 30%;*/
-    right: 25%;
+    right: 30%;
 }
 
 #splash-image {
