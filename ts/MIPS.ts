@@ -140,7 +140,7 @@ export class MIPS {
         .value += binary;
   }
 
-  private getInstructionInBinary(
+  public getInstructionInBinary(
       instructionType: string, instructionAndArguments: string[]): string {
     var output: string = '';
 
@@ -172,8 +172,7 @@ export class MIPS {
         var funct =
             this.instructionsFUNCT
                 [this.instructionsFUNCT.indexOf(instructionAndArguments[0]) +
-                 1] +
-            '';  // FUNCT
+                 1];  // FUNCT
 
 
 
@@ -188,12 +187,11 @@ export class MIPS {
         output =
             this.instructionsOPCODE
                 [this.instructionsOPCODE.indexOf(instructionAndArguments[0]) +
-                 1] +
-            '';  // OPCODE
+                 1];  // OPCODE
 
         // output = Number(output) + '';
 
-        output = parseInt(output, 16).toString(2) + '';
+        output = parseInt(output, 16).toString(2);
 
         output = this.alignTo(output, 6) + ' ';
 
@@ -501,7 +499,7 @@ export class MIPS {
     return index;
   }
 
-  private alignTo(num: string, to: number): string {
+  public alignTo(num: string, to: number): string {
     if (num == undefined) {
       console.log(to);
     }

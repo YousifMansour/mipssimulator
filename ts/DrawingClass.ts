@@ -2,6 +2,7 @@ import './ttsConfig.js';
 
 import {Animator} from './Animator';
 import {HTMLHandler} from './HTMLHandler';
+import {MIPS} from './MIPS';
 import {SoundController} from './SoundController';
 import {TypeObject} from './TypeObject';
 
@@ -9,6 +10,8 @@ export class DrawingClass {
   HTMLHandler: HTMLHandler;
   animator: Animator;
   canvas: HTMLCanvasElement;
+
+  binHex: boolean = true;
 
   // typeobjects should be here
   Rtype: TypeObject;
@@ -34,9 +37,14 @@ export class DrawingClass {
 
   soundController: SoundController;
 
-  constructor(HTMLHandler: HTMLHandler, soundController: SoundController) {
+  mips: MIPS;
+
+  constructor(
+      HTMLHandler: HTMLHandler, soundController: SoundController, mips: MIPS) {
+    this.mips = mips;
     this.lineWidth = 4;
     this.animationSpeed = 500;
+
     this.color = '#ffff66';
 
     this.HTMLHandler = HTMLHandler;
@@ -51,31 +59,25 @@ export class DrawingClass {
         'Rtype', 'add, addu, sub, subu, and, or, slt, sltu'.split(', '),
         [
           this.PC.bind(this),
-          this.fromPC.bind(this),
           this.readAddress.bind(this),
-          this.fromReadAddress.bind(this),
           this.instruction3126.bind(this),
           this.drawControl.bind(this),
+          this.instruction2521.bind(this),
+          this.instruction2016_1.bind(this),
+          this.instruction1511.bind(this),
+          this.instruction150.bind(this),
           this.regDst.bind(this),
           this.aluOp.bind(this),
           this.ALUcontrol.bind(this),
           this.regWrite.bind(this),
-          this.instruction2521.bind(this),
-          this.instruction2016.bind(this),
-          this.instruction2016_1.bind(this),
-          this.instruction1511.bind(this),
           this.drawMUX1511.bind(this),
-          this.muxToWriteRegister.bind(this),
           this.registers.bind(this),
           this.readData1.bind(this),
           this.readData2.bind(this),
           this.muxALU.bind(this),
-          this.muxALUtoALUBottom.bind(this),
-          this.instruction150.bind(this),
           this.instruction50.bind(this),
           this.aluControlToAluBottom.bind(this),
           this.aluBottom.bind(this),
-          this.fromALUResult.bind(this),
           this.toMuxBottomRight.bind(this),
           this.bottomRightMux.bind(this),
           this.bottomRightMuxToWriteData.bind(this)
@@ -86,31 +88,24 @@ export class DrawingClass {
         'Itype', 'addi, addiu, andi, slti, sltiu, ori'.split(', '),
         [
           this.PC.bind(this),
-          this.fromPC.bind(this),
           this.readAddress.bind(this),
-          this.fromReadAddress.bind(this),
           this.instruction3126.bind(this),
+          this.instruction2521.bind(this),
+          this.draw2016toMUX.bind(this),
+          this.drawMUX1511.bind(this),
+          this.instruction150.bind(this),
           this.drawControl.bind(this),
           this.aluOp.bind(this),
           this.ALUcontrol.bind(this),
           this.aluSrc.bind(this),
           this.regWrite.bind(this),
-          this.instruction2521.bind(this),
-          this.instruction2016.bind(this),
-          this.draw2016toMUX.bind(this),
-          this.drawMUX1511.bind(this),
-          this.muxToWriteRegister.bind(this),
           this.registers.bind(this),
           this.readData1.bind(this),
-          this.instruction150.bind(this),
           this.signExtended.bind(this),
           this.signExtendToShiftLeftBottom.bind(this),
-          this.signExtendToMUX.bind(this),
           this.muxALU.bind(this),
-          this.muxALUtoALUBottom.bind(this),
           this.aluControlToAluBottom.bind(this),
           this.aluBottom.bind(this),
-          this.fromALUResult.bind(this),
           this.toMuxBottomRight.bind(this),
           this.bottomRightMux.bind(this),
           this.bottomRightMuxToWriteData.bind(this)
@@ -120,10 +115,11 @@ export class DrawingClass {
         'lw', 'lw, lb'.split(', '),
         [
           this.PC.bind(this),
-          this.fromPC.bind(this),
           this.readAddress.bind(this),
-          this.fromReadAddress.bind(this),
           this.instruction3126.bind(this),
+          this.instruction2521.bind(this),
+          this.draw2016toMUX.bind(this),
+          this.instruction150.bind(this),
           this.drawControl.bind(this),
           this.memRead.bind(this),
           this.memToReg.bind(this),
@@ -131,22 +127,14 @@ export class DrawingClass {
           this.ALUcontrol.bind(this),
           this.aluSrc.bind(this),
           this.regWrite.bind(this),
-          this.instruction2521.bind(this),
-          this.instruction2016.bind(this),
-          this.draw2016toMUX.bind(this),
           this.drawMUX1511.bind(this),
-          this.muxToWriteRegister.bind(this),
           this.registers.bind(this),
           this.readData1.bind(this),
-          this.instruction150.bind(this),
           this.signExtended.bind(this),
           this.signExtendToShiftLeftBottom.bind(this),
-          this.signExtendToMUX.bind(this),
           this.muxALU.bind(this),
-          this.muxALUtoALUBottom.bind(this),
           this.aluControlToAluBottom.bind(this),
           this.aluBottom.bind(this),
-          this.fromALUResult.bind(this),
           this.ALUbottomToAddress.bind(this),
           this.dataMemory.bind(this),
           this.readDataToMuxBottomRight.bind(this),
@@ -160,29 +148,23 @@ export class DrawingClass {
         'sw', 'sw, sb'.split(', '),
         [
           this.PC.bind(this),
-          this.fromPC.bind(this),
           this.readAddress.bind(this),
-          this.fromReadAddress.bind(this),
           this.instruction3126.bind(this),
+          this.instruction2521.bind(this),
+          this.instruction2016_1.bind(this),
+          this.instruction150.bind(this),
           this.drawControl.bind(this),
           this.aluSrc.bind(this),
           this.memWrite.bind(this),
           this.aluOp.bind(this),
           this.ALUcontrol.bind(this),
-          this.instruction2521.bind(this),
-          this.instruction2016.bind(this),
-          this.instruction2016_1.bind(this),
           this.registers.bind(this),
           this.readData1.bind(this),
-          this.instruction150.bind(this),
           this.signExtended.bind(this),
           this.signExtendToShiftLeftBottom.bind(this),
-          this.signExtendToMUX.bind(this),
           this.muxALU.bind(this),
-          this.muxALUtoALUBottom.bind(this),
           this.aluControlToAluBottom.bind(this),
           this.aluBottom.bind(this),
-          this.fromALUResult.bind(this),
           this.ALUbottomToAddress.bind(this),
           this.readData2ToWriteData.bind(this),
           this.dataMemory.bind(this)
@@ -192,28 +174,24 @@ export class DrawingClass {
         'beq', 'beq, '.split(', '),
         [
           this.PC.bind(this),
-          this.fromPC.bind(this),
           this.readAddress.bind(this),
-          this.fromReadAddress.bind(this),
           this.instruction3126.bind(this),
+          this.instruction2521.bind(this),
+          this.instruction2016_1.bind(this),
+          this.instruction150.bind(this),
           this.drawControl.bind(this),
           this.branch.bind(this),
           this.aluOp.bind(this),
           this.ALUcontrol.bind(this),
-          this.instruction2521.bind(this),
-          this.instruction2016.bind(this),
-          this.instruction2016_1.bind(this),
           this.registers.bind(this),
           this.readData1.bind(this),
           this.readData2.bind(this),
           this.muxALU.bind(this),
-          this.muxALUtoALUBottom.bind(this),
           this.aluControlToAluBottom.bind(this),
           this.aluBottom.bind(this),
           this.zeroToHalfCircle.bind(this),
           this.HalfCircle.bind(this),
           this.halfCircleToMux.bind(this),
-          this.instruction150.bind(this),
           this.signExtended.bind(this),
           this.signExtendToShiftLeftBottom.bind(this),
           this.toShiftLeft2.bind(this),
@@ -235,8 +213,7 @@ export class DrawingClass {
     this.j = new TypeObject(
         'j', 'j, '.split(', '),
         [
-          this.PC.bind(this), this.fromPC.bind(this),
-          this.readAddress.bind(this), this.fromReadAddress.bind(this),
+          this.PC.bind(this), this.readAddress.bind(this),
           this.instruction3126.bind(this), this.drawControl.bind(this),
           this.jump.bind(this), this.instruction250.bind(this),
           this.shiftLeft2.bind(this), this.fromJumpAddress.bind(this),
@@ -258,6 +235,10 @@ export class DrawingClass {
     this.soundController = soundController;
 
     console.log('Drawing Object constructed');
+  }
+
+  toggleBinHex() {
+    this.binHex = !this.binHex;
   }
 
   setAudio(playing: boolean) {
@@ -370,9 +351,9 @@ export class DrawingClass {
         0.035 * this.canvas.width, 0.137 * this.canvas.height);
     this.brush.fillText(
         'PC', 0.04 * this.canvas.width, 0.560 * this.canvas.height);
-  }
+    //   }
 
-  fromPC() {  // Draws the line that comes from PC
+    //   fromPC() {  // Draws the line that comes from PC
 
     this.brush.beginPath();  // line
     this.brush.moveTo(0.069 * this.canvas.width, 0.551 * this.canvas.height);
@@ -430,9 +411,16 @@ export class DrawingClass {
   }
 
   // address: string
-  readAddress() {  // draws the rectangle containing read address
+  readAddress(
+      stringALU: string, instruction3126: string, instruction2521: string,
+      instruction2016: string, instruction1511: string, instruction150: string,
+      instruction250: string, instruction50: string,
+      instruction310: string) {  // draws the rectangle containing read address
 
     if (this.audio) this.soundController.playSound(ttsConfig.readAddress);
+
+    // var text: string = instruction310;
+    var text = '[31-0]';
 
     this.brush.strokeRect(
         0.102 * this.canvas.width, 0.528 * this.canvas.height,
@@ -444,24 +432,24 @@ export class DrawingClass {
     this.brush.fillText(
         'Instructions', 0.103 * this.canvas.width, 0.620 * this.canvas.height);
     this.brush.fillText(
-        '[31-0]', 0.140 * this.canvas.width, 0.643 * this.canvas.height);
+        text, 0.140 * this.canvas.width, 0.643 * this.canvas.height);
     this.brush.fillText(
         'Instruction', 0.103 * this.canvas.width, 0.689 * this.canvas.height);
     this.brush.fillText(
         'memory', 0.108 * this.canvas.width, 0.712 * this.canvas.height);
-  }
+    //   }
 
-  fromReadAddress() {
+    //   fromReadAddress() {
     this.brush.beginPath();
     this.brush.moveTo(0.183 * this.canvas.width, 0.632 * this.canvas.height);
     this.brush.lineTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
     this.brush.stroke();
   }
 
-  instruction2016(
+  instruction2016_1(
       stringALU: string, instruction3126: string, instruction2521: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     var text: string = instruction2016;
     if (text == undefined) text = '';
 
@@ -473,9 +461,7 @@ export class DrawingClass {
 
     this.brush.fillText(
         text, 0.201 * this.canvas.width, 0.572 * this.canvas.height);
-  }
 
-  instruction2016_1() {
     this.brush.beginPath();
     this.brush.moveTo(0.267 * this.canvas.width, 0.586 * this.canvas.height);
     this.brush.lineTo(0.345 * this.canvas.width, 0.586 * this.canvas.height);
@@ -486,7 +472,7 @@ export class DrawingClass {
   instruction2521(
       stringALU: string, instruction3126: string, instruction2521: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     var text: string = '';
     if (this.brush.lineWidth != this.defaultLineWidth) text = instruction2521;
 
@@ -507,13 +493,14 @@ export class DrawingClass {
   instruction3126(
       stringALU: string, instruction3126: string, instruction2531: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
-
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
     var str: string = stringALU;
 
     var text: string = '';
@@ -544,7 +531,7 @@ export class DrawingClass {
   instruction1511(
       stringALU: string, instruction3126: string, instruction2521: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     if (instruction1511 == undefined) instruction1511 = '';
 
     this.brush.beginPath();
@@ -562,7 +549,7 @@ export class DrawingClass {
   instruction150(
       stringALU: string, instruction3126: string, instruction2521: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     if (instruction150 == undefined) instruction150 = '';
 
     this.brush.beginPath();
@@ -587,7 +574,7 @@ export class DrawingClass {
   instruction250(
       stringALU: string, instruction3126: string, instruction2521: string,
       instruction2016: string, instruction1511: string, instruction150: string,
-      instruction250: string) {
+      instruction250: string, instruction50: string, instruction310: string) {
     if (instruction250 == undefined) instruction250 = '';
 
     this.brush.beginPath();
@@ -614,8 +601,11 @@ export class DrawingClass {
 
     // change color
     var temp: string = this.brush.strokeStyle;
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     this.brush.beginPath();
     this.brush.ellipse(
@@ -645,9 +635,35 @@ export class DrawingClass {
         'x', 0.318 * this.canvas.width, 0.710 * this.canvas.height);  // x+24
     this.brush.fillText(
         '1', 0.318 * this.canvas.width, 0.733 * this.canvas.height);  // x+34
+
+    if (this.audio)
+      this.soundController.playSound(ttsConfig.muxToWriteRegister);
+
+    this.brush.beginPath();
+    this.brush.moveTo(0.343 * this.canvas.width, 0.666 * this.canvas.height);
+    this.brush.lineTo(0.345 * this.canvas.width, 0.666 * this.canvas.height);
+    this.brush.stroke();
+
+    this.drawArrow(0.345 * this.canvas.width, 0.666 * this.canvas.height);
   }
 
-  draw2016toMUX() {
+  draw2016toMUX(
+      stringALU: string, instruction3126: string, instruction2521: string,
+      instruction2016: string, instruction1511: string, instruction150: string,
+      instruction250: string, instruction50: string, instruction310: string) {
+    var text: string = instruction2016;
+    if (text == undefined) text = '';
+
+    this.brush.beginPath();
+    this.brush.moveTo(0.198 * this.canvas.width, 0.632 * this.canvas.height);
+    this.brush.lineTo(0.198 * this.canvas.width, 0.586 * this.canvas.height);
+    this.brush.lineTo(0.267 * this.canvas.width, 0.586 * this.canvas.height);
+    this.brush.stroke();
+
+    this.brush.fillText(
+        text, 0.201 * this.canvas.width, 0.572 * this.canvas.height);
+
+
     this.brush.beginPath();
     this.brush.moveTo(0.266 * this.canvas.width, 0.586 * this.canvas.height);
     this.brush.lineTo(0.266 * this.canvas.width, 0.620 * this.canvas.height);
@@ -671,17 +687,6 @@ export class DrawingClass {
         'extended', 0.38 * this.canvas.width, 0.836 * this.canvas.height);
   }
 
-  muxToWriteRegister() {
-    if (this.audio)
-      this.soundController.playSound(ttsConfig.muxToWriteRegister);
-
-    this.brush.beginPath();
-    this.brush.moveTo(0.343 * this.canvas.width, 0.666 * this.canvas.height);
-    this.brush.lineTo(0.345 * this.canvas.width, 0.666 * this.canvas.height);
-    this.brush.stroke();
-
-    this.drawArrow(0.345 * this.canvas.width, 0.666 * this.canvas.height);
-  }
 
   registers() {
     if (this.audio) this.soundController.playSound(ttsConfig.registers);
@@ -742,8 +747,11 @@ export class DrawingClass {
   regDst() {
     // change color
     var temp: string = this.brush.strokeStyle;
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.regDst);
 
@@ -770,8 +778,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.jump);
 
@@ -850,7 +860,13 @@ export class DrawingClass {
         'memory', 0.814 * this.canvas.width, 0.793 * this.canvas.height);
   }
 
-  instruction50() {
+  instruction50(
+      stringALU: string, instruction3126: string, instruction2521: string,
+      instruction2016: string, instruction1511: string, instruction150: string,
+      instruction250: string, instruction50: string, instruction310: string) {
+    var text: string = instruction50;
+    if (text == undefined) text = '';
+
     this.brush.beginPath();
     this.brush.moveTo(0.343 * this.canvas.width, 0.816 * this.canvas.height);
     this.brush.lineTo(0.343 * this.canvas.width, 0.931 * this.canvas.height);
@@ -862,16 +878,17 @@ export class DrawingClass {
     this.drawArrow(0.536 * this.canvas.width, 0.839 * this.canvas.height);
 
     this.brush.fillText(
-        'Instruction [5-0]', 0.362 * this.canvas.width,
-        0.912 * this.canvas.height);
+        text, 0.362 * this.canvas.width, 0.912 * this.canvas.height);
   }
 
   ALUcontrol() {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     this.brush.beginPath();
     this.brush.ellipse(
@@ -908,8 +925,11 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
+
     this.brush.fillText(
         'Zero', 0.651 * this.canvas.width, 0.597 * this.canvas.height);
 
@@ -939,9 +959,9 @@ export class DrawingClass {
         'x', 0.540 * this.canvas.width, 0.706 * this.canvas.height);  // x+24
     this.brush.fillText(
         '1', 0.540 * this.canvas.width, 0.728 * this.canvas.height);  // x+34
-  }
+                                                                      //   }
 
-  muxALUtoALUBottom() {
+    //   muxALUtoALUBottom() {
     if (this.audio) this.soundController.playSound(ttsConfig.muxALUtoALUBottom);
 
     this.brush.beginPath();
@@ -958,6 +978,11 @@ export class DrawingClass {
 
     this.brush.beginPath();
     this.brush.moveTo(0.691 * this.canvas.width, 0.643 * this.canvas.height);
+    this.brush.lineTo(0.711 * this.canvas.width, 0.643 * this.canvas.height);
+    this.brush.stroke();
+
+    this.brush.beginPath();
+    this.brush.moveTo(0.691 * this.canvas.width, 0.643 * this.canvas.height);
     this.brush.lineTo(0.74 * this.canvas.width, 0.643 * this.canvas.height);
     this.brush.stroke();
 
@@ -966,6 +991,11 @@ export class DrawingClass {
 
   toMuxBottomRight() {
     if (this.audio) this.soundController.playSound(ttsConfig.toMuxBottomRight);
+
+    this.brush.beginPath();
+    this.brush.moveTo(0.691 * this.canvas.width, 0.643 * this.canvas.height);
+    this.brush.lineTo(0.711 * this.canvas.width, 0.643 * this.canvas.height);
+    this.brush.stroke();
 
     this.brush.beginPath();
     this.brush.moveTo(0.711 * this.canvas.width, 0.643 * this.canvas.height);
@@ -1049,9 +1079,9 @@ export class DrawingClass {
 
     this.brush.fillText(
         '32', 0.463 * this.canvas.width, 0.802 * this.canvas.height);
-  }
+    //   }
 
-  signExtendToMUX() {
+    //   signExtendToMUX() {
     if (this.audio) this.soundController.playSound(ttsConfig.signExtendToMUX);
 
     this.brush.beginPath();
@@ -1093,8 +1123,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     this.brush.beginPath();
     this.brush.moveTo(0.77 * this.canvas.width, 0.333 * this.canvas.height);
@@ -1115,8 +1147,11 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
+
     this.brush.beginPath();
     this.brush.moveTo(0.691 * this.canvas.width, 0.586 * this.canvas.height);
     this.brush.lineTo(0.718 * this.canvas.width, 0.586 * this.canvas.height);
@@ -1133,8 +1168,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.branch);
 
@@ -1156,8 +1193,10 @@ export class DrawingClass {
   halfCircleToMux() {
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     this.brush.beginPath();
     this.brush.moveTo(0.785 * this.canvas.width, 0.298 * this.canvas.height);
@@ -1190,8 +1229,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.memRead);
 
@@ -1215,8 +1256,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.memToReg);
 
@@ -1240,8 +1283,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     this.brush.beginPath();
     this.brush.moveTo(0.385 * this.canvas.width, 0.397 * this.canvas.height);
@@ -1265,8 +1310,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.memWrite);
 
@@ -1288,8 +1335,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.aluSrc);
 
@@ -1311,8 +1360,10 @@ export class DrawingClass {
     // change color
     var temp: string = this.brush.strokeStyle;
 
-    this.brush.strokeStyle = '#006eca';
-    this.brush.fillStyle = '#006eca';
+    if (this.brush.strokeStyle != this.color) {
+      this.brush.strokeStyle = '#006eca';
+      this.brush.fillStyle = '#006eca';
+    }
 
     if (this.audio) this.soundController.playSound(ttsConfig.regWrite);
 
@@ -1515,80 +1566,73 @@ export class DrawingClass {
 
     this.setLineWidth(4);
 
-    var instruction3126: string;
-    var instruction2521: string;
-    var instruction2016: string;
-    var instruction1511: string;
-    var instruction150: string;
-    var instruction250: string;
+    var instruction3126: string = '';
+    var instruction2521: string = '';
+    var instruction2016: string = '';
+    var instruction1511: string = '';
+    var instruction150: string = '';
+    var instruction250: string = '';
+
+    var instruction50: string = '';
+    var instruction310: string = '';
+
+
+
+    var binary = this.mips.getInstructionInBinary(type, instructionAndArguments)
+                     .replace(/\n/g, '')
+                     .split(' ');
+
+    // alert(binary.length);
+
+
+    instruction3126 = binary[0];
+    instruction2521 = binary[1];
+    instruction2016 = binary[2];
+    instruction1511 = binary[3];
+    instruction150 = binary[3] + binary[4];
+    instruction50 = binary[4];
+    instruction310 = binary.join('');
+
+    // instruction50 = instruction150;
 
     if (type == 'Itype' || type == 'beq') {
-      // wow
-      // console.log("0 ->" + instructionAndArguments[0]);
-      // console.log("\n1 ->" + instructionAndArguments[1]);
-      // console.log("\n2 ->" + instructionAndArguments[2]);
-      // console.log("\n3 ->" + instructionAndArguments[3]);
-
-      instruction3126 = instructionAndArguments[0];  // for instruction
-      instruction2521 = instructionAndArguments[2];  // first argument
-      instruction2016 = instructionAndArguments[1];
-      // might need to switch 2 and 1
       instruction1511 = '';
-      instruction150 = instructionAndArguments[3];
+      //   instruction50 = '';
       instruction250 = '';
 
     } else if (type == 'lw' || type == 'sw' || type == 'lb' || type == 'sb') {
-    //   console.log('0 ->' + instructionAndArguments[0]);
-    //   console.log('\n1 ->' + instructionAndArguments[1]);
-    //   console.log('\n2 ->' + instructionAndArguments[2]);
-    //   console.log('\n3 ->' + instructionAndArguments[3]);
-
-      var secondString = instructionAndArguments[2];
-
-      var endIndex = secondString.indexOf('(');
-
-      var arrayName: string = '';
-
-      for (var i = 0; i < endIndex; i++) {
-        arrayName += secondString.charAt(i);
-      }
-
-      var registerForIndex: string = '';
-
-      for (var i = endIndex + 1; i < secondString.length - 1; i++) {
-        registerForIndex += secondString.charAt(i);
-      }
-
-      var registerInsedeBrackets: string = registerForIndex;
-
-
-      instruction3126 = instructionAndArguments[0];  // for instruction
-      instruction2521 = registerInsedeBrackets;
-      instruction2016 = instructionAndArguments[1];
       instruction1511 = '';
-      instruction150 = arrayName;
       instruction250 = '';
+      //   instruction50 = '';
 
     } else if (type == 'Rtype') {
-      instruction3126 = instructionAndArguments[0];  // for instruction
-      instruction2521 = instructionAndArguments[2];
-      instruction2016 = instructionAndArguments[3];
-      instruction1511 = instructionAndArguments[1];
       instruction150 = '';
       instruction250 = '';
+      //   alert(instruction50);
 
     } else if (type == 'j') {
-      instruction3126 = instructionAndArguments[0];  // for instruction
       instruction2521 = '';
       instruction2016 = '';
       instruction1511 = '';
+      instruction50 = '';
       instruction150 = '';
-      instruction250 = instructionAndArguments[1];
+    }
+
+    if (!this.binHex) {
+      instruction3126 = parseInt(instruction3126, 2).toString(16);
+      instruction2521 = parseInt(instruction2521, 2).toString(16);
+      instruction2016 = parseInt(instruction2016, 2).toString(16);
+      instruction1511 = parseInt(instruction1511, 2).toString(16);
+      instruction150 = parseInt(instruction150, 2).toString(16);
+      instruction250 = parseInt(instruction250, 2).toString(16);
+      instruction50 = parseInt(instruction50, 2).toString(16);
+      instruction310 = parseInt(instruction310, 2).toString(16);
     }
 
     func(
         stringALU, instruction3126, instruction2521, instruction2016,
-        instruction1511, instruction150, instruction250);
+        instruction1511, instruction150, instruction250, instruction50,
+        instruction310);
   }
 
   drawDefault() {
@@ -1639,24 +1683,24 @@ export class DrawingClass {
     // draws everything normally
     this.MuxToPC();
     this.PC();
-    this.fromPC();
+    // this.fromPC();
     this.toADD();
     this.drawADD();
     this.topRightMUX();
-    this.readAddress();
-    this.fromReadAddress();
-    this.instruction2016('', '', '', '', '', '', '');
+    this.readAddress('', '', '', '', '', '', '', '', '');
+    // this.fromReadAddress();
+    // this.instruction2016('', '', '', '', '', '', '', '', '');
 
-    this.instruction2521('', '', '', '', '', '', '');
-    this.instruction3126('', '', '', '', '', '', '');
-    this.instruction1511('', '', '', '', '', '', '');
-    this.instruction150('', '', '', '', '', '', '');
-    this.instruction250('', '', '', '', '', '', '');
+    this.instruction2521('', '', '', '', '', '', '', '', '');
+    this.instruction3126('', '', '', '', '', '', '', '', '');
+    this.instruction1511('', '', '', '', '', '', '', '', '');
+    this.instruction150('', '', '', '', '', '', '', '', '');
+    this.instruction250('', '', '', '', '', '', '', '', '');
     this.drawControl();
     this.drawMUX1511();
-    this.draw2016toMUX();
+    this.draw2016toMUX('', '', '', '', '', '', '', '', '');
     this.signExtended();
-    this.muxToWriteRegister();
+    // this.muxToWriteRegister();
     this.registers();
     this.shiftLeft2();
     this.regDst();
@@ -1665,11 +1709,11 @@ export class DrawingClass {
     this.readData2();
     this.readData2ToWriteData();
     this.dataMemory();
-    this.instruction50();
+    this.instruction50('', '', '', '', '', '', '', '', '');
     this.ALUcontrol();
     this.aluBottom();
     this.muxALU();
-    this.muxALUtoALUBottom();
+    // this.muxALUtoALUBottom();
     this.ALUbottomToAddress();
     this.toMuxBottomRight();
     this.readDataToMuxBottomRight();
@@ -1700,9 +1744,9 @@ export class DrawingClass {
 
 
     // new Lines
-    this.instruction2016_1();
+    this.instruction2016_1('', '', '', '', '', '', '', '', '');
     this.muxToMux();
-    this.signExtendToMUX();
+    // this.signExtendToMUX();
     this.fromJumpAddress();
     this.toShiftLeft2();
     this.ToJumpAddress();

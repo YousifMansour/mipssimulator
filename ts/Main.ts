@@ -62,6 +62,8 @@ window.onload = function(): void {
 
     controller.HTMLHandler.soundButton.addEventListener("click", function() { controller.soundController.toggleAudio(); controller.HTMLHandler.toggleSound(); }, false);
 
+    controller.HTMLHandler.binHexButton.addEventListener("click", function(){controller.drawingObject.toggleBinHex()});
+
     document.onkeydown = function(e) {
 
         if (Splash.isRunning()) {
