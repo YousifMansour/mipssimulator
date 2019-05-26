@@ -1,7 +1,7 @@
 # mipssimulator
 MIPS Simulator is a website that simulates a MIPS program and shows the CPU data-paths associated with each instruction as it is running, along with the state of registers.
 
-http://mipssimulator.com/
+https://www.yousifmansour.space/mipssimulator/
 
 
 Supported Instructions: 
